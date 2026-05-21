@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <title>Critical Care & Emergency Nursing — Exam Portal</title>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -15,24 +16,234 @@
     padding: 30px 16px 60px;
   }
 
+  /* ── Header ── */
   .portal-header {
     text-align: center;
     margin-bottom: 10px;
+    position: relative;
   }
 
   .portal-header h1 {
     font-family: 'Syne', sans-serif;
-    font-size: clamp(1.5rem, 3.5vw, 2rem);
+    font-size: clamp(1.4rem, 3.5vw, 1.9rem);
     font-weight: 800;
     color: #2c3e50;
     margin-bottom: 0;
+  }
+
+  /* ── Donate button ── */
+  .donate-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    margin-top: 12px;
+    padding: 9px 22px;
+    background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+    color: #fff;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.88rem;
+    font-weight: 700;
+    border: none;
+    border-radius: 999px;
+    cursor: pointer;
+    box-shadow: 0 4px 18px rgba(238,90,36,0.38);
+    transition: transform 0.18s, box-shadow 0.18s;
+    letter-spacing: 0.02em;
+    animation: pulse-donate 2.4s infinite;
+  }
+
+  .donate-btn:hover {
+    transform: translateY(-2px) scale(1.04);
+    box-shadow: 0 8px 28px rgba(238,90,36,0.5);
+    animation: none;
+  }
+
+  .donate-btn .heart-icon {
+    font-size: 15px;
+    animation: heartbeat 1.2s infinite;
+  }
+
+  @keyframes heartbeat {
+    0%,100% { transform: scale(1); }
+    25% { transform: scale(1.3); }
+    50% { transform: scale(1); }
+    75% { transform: scale(1.2); }
+  }
+
+  @keyframes pulse-donate {
+    0%,100% { box-shadow: 0 4px 18px rgba(238,90,36,0.38); }
+    50% { box-shadow: 0 4px 28px rgba(238,90,36,0.65); }
+  }
+
+  /* ── Donate Modal overlay ── */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(10,10,20,0.6);
+    backdrop-filter: blur(7px);
+    z-index: 9999;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+  }
+
+  .modal-overlay.open { display: flex; }
+
+  /* ── Donate Modal card ── */
+  .donate-modal {
+    width: 100%;
+    max-width: 460px;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 28px 70px rgba(0,0,0,0.45);
+    animation: popIn 0.28s cubic-bezier(.34,1.56,.64,1);
+    position: relative;
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  @keyframes popIn {
+    from { transform: scale(0.82) translateY(24px); opacity: 0; }
+    to   { transform: scale(1) translateY(0);   opacity: 1; }
+  }
+
+  /* dark header */
+  .dw-head {
+    background: #1a1a2e;
+    padding: 2rem 2rem 1.6rem;
+    text-align: center;
+    position: relative;
+  }
+
+  .modal-close {
+    position: absolute;
+    top: 12px; right: 14px;
+    background: rgba(255,255,255,0.1);
+    border: none;
+    border-radius: 50%;
+    width: 30px; height: 30px;
+    color: rgba(255,255,255,0.7);
+    font-size: 14px;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: background 0.15s;
+  }
+  .modal-close:hover { background: rgba(255,255,255,0.2); }
+
+  .dw-pulse {
+    width: 64px; height: 64px;
+    border-radius: 50%;
+    background: rgba(127,119,221,0.15);
+    border: 1.5px solid rgba(127,119,221,0.4);
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 1rem;
+    animation: dwpulse 2.4s ease-in-out infinite;
+  }
+  @keyframes dwpulse {
+    0%,100% { transform: scale(1); opacity: 1; }
+    50%      { transform: scale(1.08); opacity: 0.75; }
+  }
+
+  .dw-head h3 {
+    margin: 0 0 5px;
+    font-size: 20px;
+    font-weight: 500;
+    color: #fff;
+  }
+
+  .dw-head p {
+    margin: 0;
+    font-size: 13px;
+    color: rgba(255,255,255,0.4);
+  }
+
+  /* body */
+  .dw-body {
+    background: #0d1117;
+    border-top: none;
+    padding: 1.25rem;
+  }
+
+  .dw-divider {
+    display: flex; align-items: center; gap: 10px;
+    margin: 0.25rem 0 1rem;
+  }
+  .dw-divider span {
+    font-size: 11px;
+    color: rgba(255,255,255,0.3);
+    letter-spacing: 0.06em;
+    white-space: nowrap;
+  }
+  .dw-divider hr {
+    flex: 1; border: none;
+    border-top: 0.5px solid rgba(255,255,255,0.1);
+  }
+
+  /* payment cards */
+  .dw-card {
+    border-radius: 12px;
+    padding: 1rem 1.25rem;
+    margin-bottom: 10px;
+    display: flex; align-items: center; gap: 14px;
+    border: 0.5px solid transparent;
+    transition: border-color 0.15s;
+  }
+  .dw-card:hover { border-color: rgba(255,255,255,0.15); }
+  .dw-card-vf { background: #16213e; }
+  .dw-card-ip { background: #0f3460; }
+
+  .dw-icon {
+    width: 42px; height: 42px;
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .dw-lbl {
+    font-size: 11px; letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.45);
+    margin: 0 0 3px;
+  }
+
+  .dw-num {
+    font-size: 20px; font-weight: 500;
+    letter-spacing: 0.06em;
+    color: #fff; margin: 0;
+  }
+
+  .dw-btn {
+    margin-left: auto;
+    background: rgba(255,255,255,0.1);
+    border: 0.5px solid rgba(255,255,255,0.2);
+    border-radius: 8px;
+    padding: 7px 14px;
+    font-size: 12px;
+    color: rgba(255,255,255,0.85);
+    cursor: pointer;
+    display: flex; align-items: center; gap: 6px;
+    flex-shrink: 0;
+    transition: background 0.15s;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .dw-btn:hover { background: rgba(255,255,255,0.18); }
+  .dw-btn:active { transform: scale(0.97); }
+
+  .dw-footer {
+    text-align: center;
+    font-size: 12px;
+    color: rgba(255,255,255,0.25);
+    margin-top: 1rem;
+    display: flex; align-items: center; justify-content: center; gap: 6px;
   }
 
   .header-divider {
     height: 4px;
     background: #3498db;
     max-width: 860px;
-    margin: 10px auto 24px;
+    margin: 14px auto 24px;
     border-radius: 2px;
   }
 
@@ -180,8 +391,51 @@
 <body>
 
 <div class="portal-header">
-  <h1>Critical Care &amp; Emergency Nursing</h1>
-  <p>Comprehensive Question Bank — Interactive Exam Portal</p>
+  <h1>Critical Care &amp; Emergency Nursing — Exam Portal</h1>
+
+</div>
+<div class="header-divider"></div>
+
+<!-- Donation Modal -->
+<div class="modal-overlay" id="donateOverlay" onclick="closeDonateOutside(event)">
+  <div class="donate-modal" id="donateModal">
+    <div class="modal-banner">
+      <button class="modal-close" onclick="closeDonate()" aria-label="Close">✕</button>
+      <div class="heart-big">❤️</div>
+      <h2>Support Us</h2>
+      <p>Every contribution makes a difference. Thank you 🤍</p>
+    </div>
+
+    <div class="modal-body">
+      <div class="pay-row">
+        <div class="pay-icon vf">
+          <i class="fa-solid fa-mobile-screen-button"></i>
+        </div>
+        <div class="pay-info">
+          <div class="pay-label">VF Cash</div>
+          <div class="pay-number">01093566524</div>
+        </div>
+        <button class="copy-btn" onclick="copyNum('01093566524', this)">
+          <i class="fa-regular fa-copy"></i> Copy
+        </button>
+      </div>
+
+      <div class="pay-row">
+        <div class="pay-icon ip">
+          <i class="fa-solid fa-arrow-right-arrow-left"></i>
+        </div>
+        <div class="pay-info">
+          <div class="pay-label">InstaPay</div>
+          <div class="pay-number">01110417490</div>
+        </div>
+        <button class="copy-btn" onclick="copyNum('01110417490', this)">
+          <i class="fa-regular fa-copy"></i> Copy
+        </button>
+      </div>
+    </div>
+
+    <div class="modal-footer">Tap "Copy" to copy the number, then open your app to send.</div>
+  </div>
 </div>
 
 <div class="container">
@@ -196,8 +450,7 @@
   </div>
 
   <div class="meter">
-    <div class="meter-chip"><span class="dot dot-answered"></span><span id="answered">Answered: 0</span></div>
-    <div class="meter-chip"><span class="dot dot-correct"></span><span id="correct">Correct: 0</span></div>
+    <span id="answered">Answered: 0</span> | <span id="correct">Correct: 0</span>
   </div>
   <div class="score-bar-wrap"><div class="score-bar" id="scoreBar"></div></div>
 
@@ -239,85 +492,136 @@ const examData = {
     {q:"Which of the following indicates internal bleeding?",options:["Clear urine output","Capillary refill > 2 seconds","Normal blood pressure","Alert mental status"],correct:"Capillary refill > 2 seconds"},
     {q:"What does blood in vomit that looks like coffee grounds suggest?",options:["Arterial bleeding","Fresh active GI hemorrhage","Older GI bleeding","Normal finding"],correct:"Older GI bleeding"},
     {q:"What is the FIRST aid step for internal bleeding in an extremity?",options:["Apply heat","Apply direct pressure if the injury is on an extremity","Give oral fluids","Elevate legs immediately"],correct:"Apply direct pressure if the injury is on an extremity"},
+    {q:"What is the immediate care for airway in internal bleeding first aid?",options:["Provide airway care and oxygen","Apply pressure to the abdomen","Administer pain medication","Nothing – wait for ambulance"],correct:"Provide airway care and oxygen"},
     {q:"What is the normal capillary refill time?",options:["Less than 2 seconds","3–4 seconds","5–6 seconds","More than 6 seconds"],correct:"Less than 2 seconds"},
     {q:"Which type of venous bleeding flow is characteristic?",options:["Spurting with each heartbeat","Oozing slowly","Steady or gushing dark red flow","Only visible internally"],correct:"Steady or gushing dark red flow"},
     {q:"A patient loses 100–200 mL of blood. What age group is this considered serious for?",options:["Adults","Children","Infants","Elderly"],correct:"Infants"},
+    {q:"During indirect pressure technique for bleeding, what else must be maintained?",options:["Elevation alone","Direct pressure and elevation","Cold compress only","Tourniquet instead"],correct:"Direct pressure and elevation"},
+    {q:"Which of the following is NOT a cause of epistaxis?",options:["Nasal tumors","Low humidity","High blood pressure","Fracture of the femur"],correct:"Fracture of the femur"},
     {q:"Before and after splinting a fracture, what must be assessed?",options:["Blood glucose","Circulation, sensory, and motor function","Pain score only","Temperature only"],correct:"Circulation, sensory, and motor function"},
     {q:"What should be done with any broken skin in an open fracture?",options:["Leave it open to air","Cover it with a clean or sterile cloth","Apply antibiotic cream immediately","Irrigate with saline"],correct:"Cover it with a clean or sterile cloth"},
     {q:"What happens to the body when there is uncontrolled significant blood loss?",options:["Hypertension","Shock (hypoperfusion) and possibly death","Fever","Increased urine output"],correct:"Shock (hypoperfusion) and possibly death"},
     {q:"How much blood loss is considered serious in a child?",options:["1 liter","250 mL","Half a liter (500 mL)","100 mL"],correct:"Half a liter (500 mL)"},
+    {q:"When protecting yourself while giving first aid for bleeding, what should you do?",options:["Use bare hands if gloves unavailable","Protect yourself before touching victim","Ask a bystander to help first","Only give first aid if wearing a full gown"],correct:"Protect yourself before touching victim"},
+    {q:"Which step comes AFTER applying direct pressure in external bleeding first aid?",options:["Apply tourniquet immediately","If dressing soaks through, add another dressing on top","Remove all dressings","Apply cold pack"],correct:"If dressing soaks through, add another dressing on top"},
+    {q:"What is the significance of checking the injured area after reassessment for epistaxis?",options:["To confirm fracture","To assess if bleeding stopped; if not, repeat pressure with ice for 10 more minutes","To check for infection","To determine if surgery is needed"],correct:"To assess if bleeding stopped; if not, repeat pressure with ice for 10 more minutes"},
+    {q:"After epistaxis stops, what advice should be given to the patient?",options:["Blow nose vigorously to clear clot","Rest for a few hours","Resume vigorous activity immediately","Apply hot towel"],correct:"Rest for a few hours"},
+    {q:"What type of clothing should be removed first in external bleeding first aid?",options:["Clothing below the bleeding area","Clothing above the bleeding area","All clothing on the body","Only jewelry"],correct:"Clothing above the bleeding area"},
+    {q:"What does 'indirect pressure' in bleeding control mean?",options:["Pressure applied directly over the wound","Pressure applied to a proximal artery combined with direct pressure and elevation","Pressure applied via tourniquet only","Pressure applied distal to the wound"],correct:"Pressure applied to a proximal artery combined with direct pressure and elevation"},
+    {q:"What does deformity of a limb indicate in the context of trauma?",options:["Muscle spasm only","Possible fracture","Skin infection","Nerve damage only"],correct:"Possible fracture"},
+    {q:"Why should you NOT press over the fracture site when controlling bleeding in an open fracture?",options:["It causes more bleeding","It can cause further bone displacement and damage","It is too painful","It blocks venous return"],correct:"It can cause further bone displacement and damage"},
+    {q:"What does a fracture of the upper limb require in addition to splinting?",options:["Traction","Support in a sling with possible extra padding at fracture site","Immediate surgery","Full body cast"],correct:"Support in a sling with possible extra padding at fracture site"},
     {q:"Which symptom differentiates a fracture from a sprain?",options:["Swelling","Hearing the bone break / deformity","Pain","Tenderness"],correct:"Hearing the bone break / deformity"},
     {q:"What is the relationship between blood loss and shock?",options:["Blood loss has no effect on blood pressure","Significant blood loss leads to shock via hypoperfusion","Only arterial blood loss causes shock","Shock causes blood loss"],correct:"Significant blood loss leads to shock via hypoperfusion"},
     {q:"What is the color of venous blood?",options:["Bright red","Pink","Dark red","Blue-black"],correct:"Dark red"},
     {q:"A patient has a suspected femur fracture with external bleeding. What is the correct sequence?",options:["Splint first, then control bleeding","Control bleeding first, then assess neurovascular status and splint","Apply tourniquet immediately","Give pain relief first"],correct:"Control bleeding first, then assess neurovascular status and splint"},
+    {q:"Which investigation is NOT typically needed first for a simple closed fracture?",options:["Physical examination","X-ray","Emergency surgery","Assessment of neurovascular status"],correct:"Emergency surgery"},
   ],
   lec3: [
     {q:"What does CPR stand for?",options:["Cardiopulmonary Resuscitation","Cardiac Pressure Relief","Cerebral Perfusion Recovery","Cardiopulmonary Rehabilitation"],correct:"Cardiopulmonary Resuscitation"},
     {q:"CPR is an emergency procedure that begins with:",options:["Rescue breaths followed by compressions","Immediate delivery of chest compressions followed by ventilations","Calling for help first only","Using an AED immediately"],correct:"Immediate delivery of chest compressions followed by ventilations"},
+    {q:"Which of the following is a purpose of CPR?",options:["To replace definitive medical care","To maintain airway patency and sustain life","To diagnose the cause of arrest","To sedate the patient"],correct:"To maintain airway patency and sustain life"},
     {q:"What is a sign of cardiac arrest?",options:["Bradycardia with consciousness","Loss of consciousness with absent pulse","Hypertension","Normal pupil size"],correct:"Loss of consciousness with absent pulse"},
+    {q:"What does pulselessness in cardiac arrest involve?",options:["Peripheral arteries only","Large arteries such as carotid and femoral","All veins","Capillaries only"],correct:"Large arteries such as carotid and femoral"},
     {q:"What pupil change is expected in cardiac arrest?",options:["Constricted pupils","Normal pupils","Dilated pupils","Unequal pupils"],correct:"Dilated pupils"},
     {q:"What does BLS stand for?",options:["Basic Lung Support","Basic Life Support","Bilateral Life Support","Body Lifesaving System"],correct:"Basic Life Support"},
     {q:"What are the three components of BLS?",options:["Diagnosis, drugs, defibrillation","Circulation, Airway, Breathing","CPR, AED, transport","Assessment, ventilation, fluids"],correct:"Circulation, Airway, Breathing"},
     {q:"What does ACLS include in addition to BLS?",options:["Only oxygen therapy","ECG, defibrillation, IV access, and drug therapy","Manual ventilation only","Diet modifications"],correct:"ECG, defibrillation, IV access, and drug therapy"},
     {q:"How long should you check for a carotid pulse?",options:["1–2 seconds","Up to 5 seconds","5–10 seconds (no more than 10)","30 seconds"],correct:"5–10 seconds (no more than 10)"},
     {q:"If a patient has a pulse but is not breathing, how many rescue breaths per minute are given?",options:["5","10","15","20"],correct:"10"},
+    {q:"How often should the pulse be rechecked during rescue breathing?",options:["Every 30 seconds","Every 1 minute","Every 2 minutes","Every 5 minutes"],correct:"Every 2 minutes"},
     {q:"What is the correct chest compression rate per minute?",options:["60–80","80–100","100–120","120–140"],correct:"100–120"},
     {q:"In adult CPR, where should hands be placed for compressions?",options:["Upper third of sternum","Lower third of sternum between the nipples","Over the abdomen","Left side of chest"],correct:"Lower third of sternum between the nipples"},
     {q:"What is the correct compression depth for adults?",options:["1–2 inches","2–2.4 inches (5–6 cm)","3–4 inches","As deep as possible"],correct:"2–2.4 inches (5–6 cm)"},
     {q:"What is one cycle of adult CPR?",options:["15 compressions to 1 breath","30 compressions to 2 rescue breaths","5 compressions to 1 breath","20 compressions to 2 breaths"],correct:"30 compressions to 2 rescue breaths"},
     {q:"How many CPR cycles should be completed before checking rhythm with an AED?",options:["1 cycle","3 cycles","5 cycles (approximately 2 minutes)","10 cycles"],correct:"5 cycles (approximately 2 minutes)"},
+    {q:"When two rescuers are present, how often should they switch roles?",options:["Every 2 cycles","Every 5 cycles","Every 10 minutes","When one is tired only"],correct:"Every 5 cycles"},
     {q:"What maneuver is used to open the airway in a non-trauma patient?",options:["Jaw thrust","Head tilt–chin lift","Finger sweep only","Mask placement"],correct:"Head tilt–chin lift"},
     {q:"What maneuver is used to open the airway if head or neck injury is suspected?",options:["Head tilt–chin lift","Finger sweep","Jaw thrust","Hyperextension"],correct:"Jaw thrust"},
+    {q:"How do you assess for breathing?",options:["Pulse oximetry only","Look, listen, and feel","Take blood pressure","Check pupils"],correct:"Look, listen, and feel"},
     {q:"If a patient is breathing normally but unconscious, what position should they be placed in?",options:["Prone position","Recovery position","Supine with legs elevated","Sitting position"],correct:"Recovery position"},
     {q:"What does full chest recoil between compressions allow?",options:["More blood to go to the lungs","Venous return to refill the heart","Prevents rib fractures","Reduces compression fatigue"],correct:"Venous return to refill the heart"},
     {q:"What is the Heimlich maneuver used for?",options:["Cardiac arrest","Airway obstruction (choking)","Head injury","Seizures"],correct:"Airway obstruction (choking)"},
     {q:"How many abdominal thrusts are applied in the Heimlich maneuver?",options:["3 thrusts","5 thrusts","10 thrusts","2 thrusts"],correct:"5 thrusts"},
+    {q:"For an unconscious choking victim, CPR is started, but what extra step is added?",options:["Give extra breaths only","Look for the obstructing object before each breath and remove if visible","Skip compressions","Apply oxygen mask"],correct:"Look for the obstructing object before each breath and remove if visible"},
     {q:"What is an AED?",options:["A manual defibrillator only used by doctors","A small portable device that gives electric shock to restore heartbeat","A ventilator","A blood pressure monitor"],correct:"A small portable device that gives electric shock to restore heartbeat"},
+    {q:"What is the purpose of an AED?",options:["Provide oxygen","Rapidly identify and provide early defibrillation in cardiac arrest","Measure blood glucose","Give medications"],correct:"Rapidly identify and provide early defibrillation in cardiac arrest"},
     {q:"At what age should adult AED pads NOT be used without pediatric pads?",options:["Under 12 years","Under 10 years","Under 8 years","Under 5 years"],correct:"Under 8 years"},
     {q:"Should you touch the victim while the AED analyzes the rhythm?",options:["Yes, continue CPR","No, touching affects the rhythm analysis","Only if wearing gloves","Yes, but only to check pulse"],correct:"No, touching affects the rhythm analysis"},
     {q:"Can an AED be used in a moving vehicle?",options:["Yes, always","Only in an ambulance","No, do not use in a moving vehicle","Only at slow speeds"],correct:"No, do not use in a moving vehicle"},
+    {q:"How close can a mobile phone be placed to an AED without interference risk?",options:["Within 2 feet","Within 6 feet","No restriction","10 feet minimum"],correct:"Within 6 feet"},
     {q:"Before delivering a shock with AED, what must be ensured?",options:["Patient is on a wet surface","The area around the patient is clear","Phone is nearby","Patient is restrained"],correct:"The area around the patient is clear"},
     {q:"In infant CPR, what is the compression-to-breath ratio?",options:["30:2","15:2","5:1","10:2"],correct:"5:1"},
     {q:"What rate of compressions is used in infant CPR?",options:["60 per minute","80 per minute","100 per minute","120 per minute"],correct:"100 per minute"},
+    {q:"For infants with a pulse but not breathing, rescue breaths are given every:",options:["6 seconds","3 seconds","10 seconds","2 seconds"],correct:"3 seconds"},
+    {q:"For a conscious infant with airway obstruction, what is the sequence?",options:["5 chest thrusts only","5 back blows then 5 chest thrusts, repeated until expelled","Abdominal thrusts","Finger sweep immediately"],correct:"5 back blows then 5 chest thrusts, repeated until expelled"},
+    {q:"For an unconscious infant with airway obstruction, what is given FIRST?",options:["5 back blows","5 chest thrusts","2 slow breaths","Check mouth first"],correct:"2 slow breaths"},
     {q:"When should CPR be stopped?",options:["After 5 minutes always","When victim revives, trained help arrives, or rescuer is completely exhausted","After 30 compressions only","When AED arrives"],correct:"When victim revives, trained help arrives, or rescuer is completely exhausted"},
+    {q:"What does PLS (Prolonged Life Support) focus on?",options:["Basic compressions","Post-resuscitation care and brain protection in ICU","Use of defibrillation","Drug therapy only"],correct:"Post-resuscitation care and brain protection in ICU"},
+    {q:"What does 'full chest recoil' mean during CPR compressions?",options:["Pushing harder each time","Allowing the chest to fully rise back to normal position between compressions","Holding compressions for 2 seconds","Pushing to maximum depth always"],correct:"Allowing the chest to fully rise back to normal position between compressions"},
+    {q:"What should be done if no air enters during rescue breaths?",options:["Immediately apply AED","Retilt head and try 2 more breaths; if unsuccessful, suspect choking","Increase breath force","Stop and wait"],correct:"Retilt head and try 2 more breaths; if unsuccessful, suspect choking"},
     {q:"What is the gasping or absent respiration seen in cardiac arrest called?",options:["Kussmaul breathing","Agonal respiration","Cheyne-Stokes breathing","Normal variation"],correct:"Agonal respiration"},
+    {q:"If two rescue breaths are given per cycle in adult CPR, how long should each breath last?",options:["0.5 seconds","1 second","2 seconds","3 seconds"],correct:"1 second"},
     {q:"In the pediatric chain of survival, which comes FIRST?",options:["Early CPR","EMS activation","Prevention","Rapid PALS"],correct:"Prevention"},
+    {q:"Where is the carotid pulse checked in adults?",options:["On the wrist","On the neck","On the ankle","On the groin"],correct:"On the neck"},
     {q:"If a rescuer is alone performing adult CPR, when should they activate EMS?",options:["After 10 minutes of CPR","Immediately after confirming unresponsiveness","After giving 5 cycles","When AED arrives"],correct:"Immediately after confirming unresponsiveness"},
+    {q:"What does 'Press hard and fast' during compressions mean?",options:["Quick light taps","100–120/min at 2–2.4 inch depth with full recoil","Slow deep compressions","Variable speed"],correct:"100–120/min at 2–2.4 inch depth with full recoil"},
     {q:"An AED should NOT be used near which material?",options:["Plastic","Flammable materials such as gasoline","Rubber","Cotton"],correct:"Flammable materials such as gasoline"},
     {q:"What is the role of alcohol in AED preparation?",options:["Use it to wipe chest for better pad adherence","Do not use alcohol to wipe the victim's chest","Use it to clean the pads","Apply it after shock delivery"],correct:"Do not use alcohol to wipe the victim's chest"},
+    {q:"What does the finger sweep technique involve?",options:["Blindly sweeping fingers in the mouth","Grasping and removing the foreign body if within reach, without forcing it deeper","Pushing object deeper to clear airway","Applying suction"],correct:"Grasping and removing the foreign body if within reach, without forcing it deeper"},
   ],
   lec4: [
     {q:"What is the definition of a poison?",options:["Any substance taken in large amounts","A substance causing illness/death in relatively small quantities","Only chemical substances","Only naturally occurring toxins"],correct:"A substance causing illness/death in relatively small quantities"},
     {q:"What percentage of all poisoning cases are caused by ingestion?",options:["More than 50%","More than 60%","More than 80%","More than 90%"],correct:"More than 80%"},
     {q:"Which sign is specific to ingested poisoning?",options:["Liquid on skin","Chemical-smelling breath and burns around the mouth","Itching and redness","Bite mark"],correct:"Chemical-smelling breath and burns around the mouth"},
     {q:"What should be done FIRST for ingested poisoning?",options:["Induce vomiting immediately","Check pulse and respiration; perform CPR if absent","Give milk to dilute","Apply activated charcoal"],correct:"Check pulse and respiration; perform CPR if absent"},
+    {q:"What percentage of poison does inducing vomiting remove from the stomach?",options:["10–20%","30–50%","60–70%","80–90%"],correct:"30–50%"},
     {q:"Within what time frame must vomiting be induced for ingested poisoning?",options:["Within 10 minutes","Within 30 minutes","Within 1 hour","Within 2 hours"],correct:"Within 30 minutes"},
     {q:"When should vomiting NOT be induced?",options:["For all pill ingestion","If victim is unconscious or having convulsions","For liquid poisons only","After 1 hour of ingestion"],correct:"If victim is unconscious or having convulsions"},
     {q:"Why should salt water NOT be used to induce vomiting?",options:["It has no effect","It can be dangerous and kill children","It causes constipation","It interferes with medication"],correct:"It can be dangerous and kill children"},
+    {q:"What should be kept after the victim vomits?",options:["Nothing","A sample of vomit, urine, and stool","Only vomit sample","Only urine sample"],correct:"A sample of vomit, urine, and stool"},
     {q:"What should be given if the victim swallowed corrosives like acids or alkalis?",options:["Induce vomiting","Water or milk to dilute","Activated charcoal","Nothing"],correct:"Water or milk to dilute"},
     {q:"What is a contraindication for activated charcoal?",options:["Ingestion of tablets","Altered mental status or ingestion of acid/alkali","All ingested poisons","Diarrhea"],correct:"Altered mental status or ingestion of acid/alkali"},
     {q:"What type of gas is carbon monoxide?",options:["Green and fragrant","Colorless, odorless, tasteless","Yellow and pungent","Visible and heavy"],correct:"Colorless, odorless, tasteless"},
     {q:"How does carbon monoxide cause harm?",options:["By irritating the airways","By displacing oxygen in red blood cells causing hypoxia","By destroying lung tissue","By raising body temperature"],correct:"By displacing oxygen in red blood cells causing hypoxia"},
     {q:"Carbon monoxide results from:",options:["Complete combustion","Incomplete combustion","Oxidation of nitrogen","Bacterial activity"],correct:"Incomplete combustion"},
+    {q:"Which symptom is associated with inhaled poisoning?",options:["Burns around mouth","Confusion and dizziness","Skin rash","Abdominal distension only"],correct:"Confusion and dizziness"},
     {q:"What is the FIRST action for inhaled poisoning?",options:["Give oxygen by mask","Turn off the source and call 123; ventilate the area","Start CPR immediately","Remove contaminated clothing first"],correct:"Turn off the source and call 123; ventilate the area"},
     {q:"For absorbed poisoning, how long should the eyes be flushed if poison entered them?",options:["5 minutes","10 minutes","At least 15 minutes","30 minutes"],correct:"At least 15 minutes"},
+    {q:"What should be done with contaminated clothing in absorbed poisoning?",options:["Leave it on to protect skin","Remove clothing and flush affected skin with cool water","Apply antidote cream","Only wash the exposed area"],correct:"Remove clothing and flush affected skin with cool water"},
+    {q:"What should be brought along if transporting a victim of absorbed poisoning?",options:["Nothing extra","A sample of the poisonous substance in a closed container","Victim's medical records","Water to flush again"],correct:"A sample of the poisonous substance in a closed container"},
     {q:"What are examples of injected poisons?",options:["Cleaning agents","Bees, poisonous insects, snakes, needles","Industrial fumes","Corroded metals"],correct:"Bees, poisonous insects, snakes, needles"},
+    {q:"What is a sign of injected poisoning?",options:["Burns around the mouth","Weakness, dizziness, chills, fever, nausea","Difficulty breathing only","Chemical skin burns"],correct:"Weakness, dizziness, chills, fever, nausea"},
     {q:"What is the emergency number mentioned in the lectures for calling for help?",options:["911","999","123","115"],correct:"123"},
     {q:"What is heat exhaustion caused by?",options:["Brain thermostat failure","Loss of salt and water through excessive sweating","Viral infection","Muscle overuse only"],correct:"Loss of salt and water through excessive sweating"},
     {q:"Which skin sign is seen in heat exhaustion?",options:["Hot and dry","Flushed and red","Pale and clammy","Yellow and jaundiced"],correct:"Pale and clammy"},
+    {q:"What is the FIRST action for heat exhaustion?",options:["Move the person out of heat to a cool/shaded place","Apply ice packs to groin","Give salt tablets","Start IV fluids"],correct:"Move the person out of heat to a cool/shaded place"},
+    {q:"What position should the patient be placed in during heat exhaustion management?",options:["Sitting upright","Prone","Lay down with legs and feet slightly elevated","Standing"],correct:"Lay down with legs and feet slightly elevated"},
     {q:"What is heat stroke?",options:["Mild heat illness with sweating","Most serious form of heat injury, a medical emergency caused by thermostat failure in the brain","Cramps from salt loss","Mild dehydration"],correct:"Most serious form of heat injury, a medical emergency caused by thermostat failure in the brain"},
     {q:"Heat stroke is also known as:",options:["Heat exhaustion","Sunstroke","Hypothermia","Frostbite"],correct:"Sunstroke"},
     {q:"Which age group is MOST affected by heat stroke?",options:["Children under 10","Adults aged 20–30","People over age 50","Infants"],correct:"People over age 50"},
     {q:"What is a characteristic sign that differentiates heat stroke from heat exhaustion?",options:["Sweating increases","Pale skin","High body temperature with altered mental status","Low pulse rate"],correct:"High body temperature with altered mental status"},
     {q:"What cooling method is used for heat stroke?",options:["Warm blankets","Evaporative cooling — spray water while fans are running; ice packs to head, neck, armpits, groin","Oral hot fluids","Warm water bath"],correct:"Evaporative cooling — spray water while fans are running; ice packs to head, neck, armpits, groin"},
+    {q:"What are heat cramps caused by?",options:["Excessive heat without fluid loss","Decrease in salt and water loss with exercise","Infection","Dehydration of the brain only"],correct:"Decrease in salt and water loss with exercise"},
+    {q:"What is the treatment for heat cramps?",options:["Cold shower only","Administer fluids, salt in cool fruit juice, stretch cramped muscles","Bed rest only","IV antibiotics"],correct:"Administer fluids, salt in cool fruit juice, stretch cramped muscles"},
     {q:"What is frostbite?",options:["Hypothermia of the whole body","Injury caused by freezing of skin and underlying tissues","Chemical burn from cold exposure","Normal cold skin reaction"],correct:"Injury caused by freezing of skin and underlying tissues"},
     {q:"Which areas are MOST commonly affected by frostbite?",options:["Torso and back","Fingers, toes, nose, ears, cheeks, and chin","Inner arms and thighs","Palms and soles only"],correct:"Fingers, toes, nose, ears, cheeks, and chin"},
+    {q:"What should be removed during frostbite first aid?",options:["Dry clothing only","All wet clothing and constrictive jewelry","Only shoes","Nothing until hospital"],correct:"All wet clothing and constrictive jewelry"},
     {q:"What should NOT be done to a frostbitten area?",options:["Keep it elevated","Rub the frozen area","Give warm fluids","Apply dry sterile bandage"],correct:"Rub the frozen area"},
+    {q:"Why should you not walk on frostbitten toes or feet?",options:["It causes sweating","It can worsen tissue damage","It is too painful","It spreads the frostbite"],correct:"It can worsen tissue damage"},
     {q:"What is hypothermia defined as?",options:["Body temperature above 40°C","Internal body temperature below 35°C","Any cold sensation","Core temperature of 36°C"],correct:"Internal body temperature below 35°C"},
     {q:"What is primary hypothermia?",options:["Due to internal metabolic failure","Due to exposure to a cold or frigid environment","Caused by infection","From excessive sweating"],correct:"Due to exposure to a cold or frigid environment"},
+    {q:"Which symptom is associated with hypothermia?",options:["Rapid speech","Shivering, slurred speech, confusion, weak pulse","Increased energy","High blood pressure"],correct:"Shivering, slurred speech, confusion, weak pulse"},
     {q:"When warming a hypothermic patient, what should be warmed FIRST?",options:["Hands and feet","Trunk first, not hands and feet","Head only","Extremities first"],correct:"Trunk first, not hands and feet"},
     {q:"What should NOT be done when treating hypothermia?",options:["Wrap in blankets","Apply dry clothing","Immerse the person in warm water (can cause heart arrhythmia)","Start CPR if not breathing"],correct:"Immerse the person in warm water (can cause heart arrhythmia)"},
+    {q:"If using hot water bottles for hypothermia, what precaution is needed?",options:["Apply directly to skin for faster warming","Wrap them in cloth; do not apply directly to skin","Use only on the head","Place only on the feet"],correct:"Wrap them in cloth; do not apply directly to skin"},
+    {q:"What type of poisoning does activated charcoal treat?",options:["All poisons including acids","Only poisoning by mouth (ingested)","Inhaled poisons only","Injected poisons"],correct:"Only poisoning by mouth (ingested)"},
+    {q:"In absorbed poisoning, what is used to flush the skin?",options:["Warm soapy water","Cool water for several minutes","Alcohol solution","Vinegar solution"],correct:"Cool water for several minutes"},
+    {q:"A victim with heat stroke has hot, dry skin. This is because:",options:["They are dehydrated only","The sweating mechanism has failed","They have a fever from infection","They are in heat exhaustion"],correct:"The sweating mechanism has failed"},
+    {q:"Which cooling measure is appropriate for heat stroke?",options:["Covering with warm blankets","Placing ice packs to neck, armpits, and groin","Giving hot fluids","Avoiding all movement"],correct:"Placing ice packs to neck, armpits, and groin"},
     {q:"What is the primary difference between heat exhaustion and heat stroke?",options:["Heat exhaustion involves high temperature; heat stroke does not","Heat stroke involves failure of the brain's thermostat and is a medical emergency; heat exhaustion is milder","They are the same condition","Heat exhaustion is more serious"],correct:"Heat stroke involves failure of the brain's thermostat and is a medical emergency; heat exhaustion is milder"},
+    {q:"Carbon monoxide causes hypoxia by:",options:["Destroying red blood cells","Taking the place of oxygen in red blood cells","Constricting airways","Blocking alveoli with fluid"],correct:"Taking the place of oxygen in red blood cells"},
+    {q:"What emergency number should be called for National Poison Control Center guidance for injected poisoning?",options:["Call 911","Call National Poison Control Center immediately","Go to pharmacy first","Wait and observe"],correct:"Call National Poison Control Center immediately"},
   ],
   lec6: [
     {q:"What is emergency nursing?",options:["Routine care for stable patients","Specialized care for all ages with acute physical or emotional problems requiring immediate intervention","Long-term care for chronic diseases","Post-operative rehabilitation"],correct:"Specialized care for all ages with acute physical or emotional problems requiring immediate intervention"},
@@ -329,30 +633,57 @@ const examData = {
     {q:"Which triage level represents a threat to life?",options:["Non-urgent","Urgent","Emergent","Resuscitation"],correct:"Resuscitation"},
     {q:"A patient in active seizure should be classified at which triage level?",options:["Non-urgent","Less urgent","Urgent","Resuscitation"],correct:"Resuscitation"},
     {q:"A patient with severe respiratory distress and cardiac suspicion is classified as:",options:["Non-urgent","Less urgent","Emergent","Urgent"],correct:"Emergent"},
+    {q:"A patient with head injury, alert, no vomiting is classified as:",options:["Resuscitation","Emergent","Urgent","Less urgent"],correct:"Less urgent"},
     {q:"A patient with minor trauma and no distress is classified as:",options:["Resuscitation","Emergent","Non-urgent","Urgent"],correct:"Non-urgent"},
     {q:"What is the neurological assessment tool used in emergency assessment?",options:["GCS only","AVPU (Alert, Verbal, Painful, Unresponsive)","Mini Mental State Exam","NIH Stroke Scale"],correct:"AVPU (Alert, Verbal, Painful, Unresponsive)"},
     {q:"What does SAMPLE stand for in subjective data collection?",options:["Signs, Allergies, Medications, Pain, Labs, Examination","Symptoms, Allergies, Medications, Past history, Last meal, Events preceding","Status, Age, Medical, Pain, Location, Evaluation","Severity, Assessment, Medications, Pulse, Labs, Exam"],correct:"Symptoms, Allergies, Medications, Past history, Last meal, Events preceding"},
     {q:"What does ACBDE stand for in objective data?",options:["Assessment, Circulation, Breathing, Disability, Exposure","Airway, Circulation, Breathing, Disability (+ Exposure)","Airway, Cardiac, Blood, Diagnosis, Emergency","Alert, Compression, Breathing, Defibrillation, Evaluation"],correct:"Airway, Circulation, Breathing, Disability (+ Exposure)"},
     {q:"What does PQRST describe in the secondary survey?",options:["Pulse, Quality, Rate, Sounds, Temperature","Precipitating factors, Quality, Region/radiation, Severity, Time of onset","Pain, Questions, Regions, Signs, Tests","Primary, Quality, Risk, Seriousness, Timeline"],correct:"Precipitating factors, Quality, Region/radiation, Severity, Time of onset"},
+    {q:"Which part of patient assessment does PQRST belong to?",options:["Primary survey subjective data","Secondary survey subjective data","Primary survey objective data","Secondary survey objective data"],correct:"Secondary survey subjective data"},
     {q:"What is the purpose of the primary survey?",options:["Detailed history taking","Identify and manage immediate life threats — Airway, Circulation, Breathing, Disability","Perform full head-to-toe exam","Review lab results"],correct:"Identify and manage immediate life threats — Airway, Circulation, Breathing, Disability"},
+    {q:"In what order are the resuscitation components performed?",options:["Breathing, Circulation, Airway, Disability","Airway, Breathing, Circulation, Disability, Exposure","Disability, Airway, Breathing, Circulation","Exposure, Disability, Airway, Circulation"],correct:"Airway, Breathing, Circulation, Disability, Exposure"},
     {q:"What does 'V' in AVPU stand for?",options:["Ventilation","Verbal stimuli response","Vital signs","Vascular assessment"],correct:"Verbal stimuli response"},
+    {q:"What does the triage nurse do while interviewing one patient?",options:["Focuses entirely on that patient","Continues to visualize all incoming patients","Takes a break","Documents without observing"],correct:"Continues to visualize all incoming patients"},
     {q:"Which characteristic is essential for a triage nurse?",options:["Speed of movement","Extensive knowledge of emergency medical treatment and critical thinking","Ability to perform surgery","Expertise in only one specialty"],correct:"Extensive knowledge of emergency medical treatment and critical thinking"},
+    {q:"Which of the following is an objective of the triage system?",options:["Increase waiting time for stable patients","Sort patients to identify life-threatening conditions and ensure most ill are seen first","Reduce documentation","Limit resources to specific patients"],correct:"Sort patients to identify life-threatening conditions and ensure most ill are seen first"},
+    {q:"What type of triage manages patients during a large-scale disaster?",options:["Non-disaster triage","Multi-casualty/disaster triage","Resuscitation-only triage","Primary triage"],correct:"Multi-casualty/disaster triage"},
+    {q:"Emergency nursing cares for patients of:",options:["Only adults","Only pediatric patients","All ages","Only geriatric patients"],correct:"All ages"},
+    {q:"What does 'stabilization' mean in the emergency nurse's role?",options:["Giving chronic medications","Implementing life-saving interventions for critical patients","Performing elective procedures","Monitoring non-urgent patients only"],correct:"Implementing life-saving interventions for critical patients"},
+    {q:"The secondary survey includes which objective assessment?",options:["Airway only","Rapid head-to-toe exam and neurological exam","Blood pressure only","ECG only"],correct:"Rapid head-to-toe exam and neurological exam"},
+    {q:"A patient with chest pain with cardiac suspicion is categorized as which triage level?",options:["Non-urgent","Less urgent","Urgent","Emergent"],correct:"Emergent"},
+    {q:"A patient with a sore throat and temperature below 39°C is categorized as:",options:["Resuscitation","Emergent","Urgent","Non-urgent"],correct:"Non-urgent"},
+    {q:"What is the FIRST component of the resuscitation phase?",options:["Disability","Exposure","Airway and cervical spine","Circulation"],correct:"Airway and cervical spine"},
+    {q:"What does the emergency nurse do during 'monitoring'?",options:["Only checks temperature","Closely monitors vital signs and conditions using advanced equipment","Records lab results only","Checks pulse once per hour"],correct:"Closely monitors vital signs and conditions using advanced equipment"},
+    {q:"What does crowd control in triage nurse roles mean?",options:["Restricting all visitors","Managing patient and visitor flow in the emergency department","Calling security for every patient","Preventing ambulances from entering"],correct:"Managing patient and visitor flow in the emergency department"},
+    {q:"Which of the following is NOT an objective of triage?",options:["Identify life-threatening conditions","Ensure limited resources are used effectively","Increase unnecessary waiting times","Minimize waiting for those needing immediate attention"],correct:"Increase unnecessary waiting times"},
     {q:"What does 'A' represent in AVPU?",options:["Airway","Alert","Assessment","Anesthesia"],correct:"Alert"},
     {q:"Which component of the primary survey addresses brain function?",options:["Airway","Circulation","Breathing","Disability"],correct:"Disability"},
+    {q:"What does the emergency nurse provide to patients and families?",options:["Only medical treatment","Emotional support, education, and clear communication","Only medications","Only physical assessment"],correct:"Emotional support, education, and clear communication"},
+    {q:"Collaboration in emergency nursing means:",options:["Working alone without consultation","Working with physicians, specialists, and other healthcare professionals","Avoiding other departments","Only consulting pharmacy"],correct:"Working with physicians, specialists, and other healthcare professionals"},
+    {q:"What is assessed in 'Exposure' during resuscitation?",options:["Blood pressure","Exposure of patient's body for complete assessment while maintaining dignity","Oxygen saturation only","IV access"],correct:"Exposure of patient's body for complete assessment while maintaining dignity"},
+    {q:"A patient with decreased level of consciousness falls under which triage level?",options:["Non-urgent","Less urgent","Emergent","Resuscitation"],correct:"Emergent"},
     {q:"What does 'P' stand for in AVPU?",options:["Pulse","Pressure","Painful stimuli response","Positioning"],correct:"Painful stimuli response"},
     {q:"Which triage level describes a condition with significant distress but not an immediate threat to life?",options:["Resuscitation","Emergent","Urgent","Less urgent"],correct:"Urgent"},
+    {q:"What does patient flow management in triage prevent?",options:["Over-treatment","Unnecessary congestion in the ED","Under-treatment","Excess documentation"],correct:"Unnecessary congestion in the ED"},
     {q:"What does ACBDE add to ABC in advanced assessment?",options:["Disability and Exposure","Drugs and Evidence","Diagnosis and Evaluation","Defects and Electrolytes"],correct:"Disability and Exposure"},
+    {q:"What is the 'Last meal' component of SAMPLE useful for?",options:["Assessing nutrition","Determining if intubation/sedation is safe and estimating ingestion timing","Ordering dietary needs","Planning discharge meal"],correct:"Determining if intubation/sedation is safe and estimating ingestion timing"},
+    {q:"GI bleed with abnormal vital signs falls under which triage level?",options:["Non-urgent","Urgent","Emergent","Resuscitation"],correct:"Emergent"},
     {q:"What does 'U' in AVPU represent?",options:["Unconscious","Unresponsive","Unable to breathe","Unstable"],correct:"Unresponsive"},
     {q:"Major trauma falls under which triage level?",options:["Non-urgent","Urgent","Emergent","Resuscitation"],correct:"Resuscitation"},
     {q:"Which of the following best describes the 'urgent' triage level?",options:["Condition with no distress","Condition with significant distress but not life-threatening","Immediate threat to life","Minor, can be delayed"],correct:"Condition with significant distress but not life-threatening"},
+    {q:"In a non-disaster triage, what is the primary objective?",options:["Treat the most patients possible","Provide the best care for each individual patient","Limit resources","Prioritize young patients"],correct:"Provide the best care for each individual patient"},
+    {q:"Past medical and surgical history is part of which mnemonic?",options:["PQRST","AVPU","SAMPLE","ACBDE"],correct:"SAMPLE"},
+    {q:"What does 'emergency nursing role in documentation' involve?",options:["Only records diagnoses","Maintains accurate patient records including history, treatment, and outcomes","Only records vital signs","Delegates to admin staff"],correct:"Maintains accurate patient records including history, treatment, and outcomes"},
   ],
   lec7: [
     {q:"What is angina pectoris?",options:["Complete blockage of a coronary artery","A clinical syndrome of chest pain/pressure due to insufficient coronary blood flow","Accumulation of fluid around the heart","Rupture of a coronary artery"],correct:"A clinical syndrome of chest pain/pressure due to insufficient coronary blood flow"},
     {q:"What is the main cause of angina?",options:["Hypertension alone","Atherosclerotic disease with obstruction of at least one major coronary artery","Viral infection of the heart","Autoimmune disease"],correct:"Atherosclerotic disease with obstruction of at least one major coronary artery"},
+    {q:"What causes ischemia in angina?",options:["Increased oxygen supply","Blockage prevents increased flow when demand rises","Excess blood to myocardium","Low blood glucose"],correct:"Blockage prevents increased flow when demand rises"},
     {q:"What is the primary drug for angina acute episode?",options:["Aspirin alone","Sublingual nitroglycerin","Beta-blockers only","Anticoagulants"],correct:"Sublingual nitroglycerin"},
     {q:"What position is used for angina patients?",options:["Prone","Flat supine","Semi-Fowler's","Trendelenburg"],correct:"Semi-Fowler's"},
     {q:"How often is nitroglycerin repeated in acute angina?",options:["Every 2 minutes for 5 doses","Every 5 minutes for up to 3 doses","Every 10 minutes for 2 doses","Once only"],correct:"Every 5 minutes for up to 3 doses"},
     {q:"When is oxygen given in angina?",options:["Always","If SpO2 < 90–94% or respiratory distress is present","Never","Only in hospital"],correct:"If SpO2 < 90–94% or respiratory distress is present"},
+    {q:"What surgical procedure uses a balloon catheter to widen a blocked artery?",options:["CABG","Pericardiocentesis","PCI (angioplasty/stenting)","Pericardiotomy"],correct:"PCI (angioplasty/stenting)"},
     {q:"What does CABG use to bypass a blocked coronary artery?",options:["Synthetic graft","A vein or artery from another body part","A stent","A balloon catheter"],correct:"A vein or artery from another body part"},
     {q:"What is myocardial infarction?",options:["Reversible angina","Ischemia resulting in myocardial cell death","Heart valve disease","Pericarditis"],correct:"Ischemia resulting in myocardial cell death"},
     {q:"What is the MONA protocol for MI?",options:["Morphine, Oxygen, Nitroglycerin, Aspirin","Metoprolol, Oxygen, Nitrates, Atropine","Magnesium, Oxygen, Nifedipine, Aspirin","Morphine, Ondansetron, Naloxone, Atropine"],correct:"Morphine, Oxygen, Nitroglycerin, Aspirin"},
@@ -360,78 +691,179 @@ const examData = {
     {q:"What is the characteristic description of MI chest pain?",options:["Sharp and localized","Heavy, squeezing, or crushing, may persist 12 hours or more","Burning with eating","Colicky and intermittent"],correct:"Heavy, squeezing, or crushing, may persist 12 hours or more"},
     {q:"Where can MI pain radiate?",options:["Only to the back","Left arm, jaw, neck, or shoulder blades","Right arm only","Abdomen only"],correct:"Left arm, jaw, neck, or shoulder blades"},
     {q:"What is congestive heart failure (CHF)?",options:["Heart pumping too much blood","Inability of the heart to pump sufficient blood to meet tissue oxygen needs","Inflammation of the pericardium","Electrical conduction failure"],correct:"Inability of the heart to pump sufficient blood to meet tissue oxygen needs"},
+    {q:"What neurohormonal mechanism is activated in CHF?",options:["Parasympathetic stimulation","Sympathetic nervous system releasing epinephrine/norepinephrine; RAAS activation","Dopamine release only","Thyroid stimulation"],correct:"Sympathetic nervous system releasing epinephrine/norepinephrine; RAAS activation"},
     {q:"What does ACE inhibitor do in CHF?",options:["Increases sodium retention","Converts angiotensin I to II","Blocks the conversion of angiotensin I to angiotensin II, reducing vasoconstriction","Stimulates aldosterone"],correct:"Blocks the conversion of angiotensin I to angiotensin II, reducing vasoconstriction"},
+    {q:"What is the nursing goal for fluid management in CHF?",options:["Fluid restriction only","Monitor fluid balance with urine output >0.5 mL/kg/hr","Force fluids","Limit all IV fluids"],correct:"Monitor fluid balance with urine output >0.5 mL/kg/hr"},
     {q:"What is cardiac tamponade?",options:["Heart failure from fluid overload","Accumulation of excess fluid in the pericardial sac restricting heart function","Blockage of coronary artery","Rupture of the cardiac wall"],correct:"Accumulation of excess fluid in the pericardial sac restricting heart function"},
     {q:"What is Beck's triad?",options:["Hypertension, bradycardia, widened pulse pressure","Muffled heart sounds, JVD, and hypotension","Chest pain, dyspnea, fever","Tachycardia, edema, cyanosis"],correct:"Muffled heart sounds, JVD, and hypotension"},
     {q:"What ECG finding is associated with cardiac tamponade?",options:["ST elevation","Electrical alternans (varying QRS amplitude)","Delta waves","Peaked T waves"],correct:"Electrical alternans (varying QRS amplitude)"},
     {q:"What is the emergency procedure to drain pericardial fluid?",options:["Pericardiotomy","CABG","Pericardiocentesis","Thoracocentesis"],correct:"Pericardiocentesis"},
+    {q:"What position is used for cardiac tamponade nursing management?",options:["Trendelenburg","High Fowler's to reduce venous return (unless severely hypotensive)","Prone","Flat supine"],correct:"High Fowler's to reduce venous return (unless severely hypotensive)"},
     {q:"What is cardiac arrest?",options:["Slow heart rate requiring pacing","Sudden unexpected cessation of effective heart function with loss of consciousness, pulse, and breathing","Irregular heart rhythm requiring medication","Heart failure with reduced ejection fraction"],correct:"Sudden unexpected cessation of effective heart function with loss of consciousness, pulse, and breathing"},
+    {q:"What causes cardiac arrest at the electrical level?",options:["Coronary artery blockage","Failure of the heart's electrical system","Fluid overload","Structural valve disease"],correct:"Failure of the heart's electrical system"},
+    {q:"What is a consequence of cardiac arrest on the brain?",options:["Increased cerebral perfusion","Global ischemia; edema increases intracranial pressure and decreases cerebral perfusion","Brain is unaffected if CPR starts within 10 minutes","Immediate permanent brain death"],correct:"Global ischemia; edema increases intracranial pressure and decreases cerebral perfusion"},
+    {q:"What is a risk factor for cardiac arrest?",options:["Regular exercise","Smoking and high blood cholesterol","Low blood pressure","Vegetarian diet"],correct:"Smoking and high blood cholesterol"},
+    {q:"What is the first step in nursing management of cardiac arrest?",options:["Administer medications","Assess vital signs and perform CPR","Apply oxygen only","Notify family"],correct:"Assess vital signs and perform CPR"},
+    {q:"In CHF, what do beta-blockers do?",options:["Increase heart rate","Reduce heart rate and contractility","Increase sodium retention","Stimulate epinephrine release"],correct:"Reduce heart rate and contractility"},
+    {q:"What is the role of angiotensin receptor blockers in CHF?",options:["Increase aldosterone","Block angiotensin II effects to reduce vasoconstriction and fluid retention","Stimulate RAAS","Increase preload"],correct:"Block angiotensin II effects to reduce vasoconstriction and fluid retention"},
+    {q:"What is the main symptom of angina?",options:["Burning on urination","Chest pain or pressure that may radiate to arms, neck, jaw, shoulder","Severe headache","Abdominal cramps"],correct:"Chest pain or pressure that may radiate to arms, neck, jaw, shoulder"},
+    {q:"What does the sympathetic nervous system release in CHF compensation?",options:["Acetylcholine","Epinephrine and norepinephrine","Insulin","Aldosterone directly"],correct:"Epinephrine and norepinephrine"},
+    {q:"What drug is used if nitroglycerin does not relieve MI pain?",options:["Aspirin","Morphine IV","Calcium channel blockers","Diuretics"],correct:"Morphine IV"},
+    {q:"What does renin release in CHF lead to?",options:["Directly reduces blood pressure","Promotes formation of angiotensin I → II → vasoconstriction and aldosterone release","Decreases sodium retention","Inhibits SNS"],correct:"Promotes formation of angiotensin I → II → vasoconstriction and aldosterone release"},
+    {q:"What is the oxygen delivery method for cardiac tamponade?",options:["Low-flow oxygen via nasal cannula","High-flow oxygen via non-rebreather mask","No oxygen needed","Oxygen only if SpO2 < 80%"],correct:"High-flow oxygen via non-rebreather mask"},
+    {q:"What type of pain does angina produce in the chest?",options:["Sharp, stabbing","Burning, fullness, pressure, or squeezing","Colicky","Dull, diffuse ache only"],correct:"Burning, fullness, pressure, or squeezing"},
     {q:"What is cardiogenic shock?",options:["Shock due to blood loss","Shock due to failure of the heart as a pump","Shock due to infection","Shock due to anaphylaxis"],correct:"Shock due to failure of the heart as a pump"},
+    {q:"What assessment finding in MI requires immediate attention?",options:["Normal urine output","Chest pain not relieved by rest or medications with ST-segment changes","Mild fatigue","Occasional skipped beats"],correct:"Chest pain not relieved by rest or medications with ST-segment changes"},
+    {q:"What is the purpose of ECG monitoring in angina?",options:["Diagnose MI only","Monitor for ST-segment changes indicating ischemia","Only to document rhythm","Determine need for surgery"],correct:"Monitor for ST-segment changes indicating ischemia"},
+    {q:"What does pericardiocentesis use?",options:["Surgical scalpel","A needle and catheter to drain pericardial fluid","A balloon catheter","Laser therapy"],correct:"A needle and catheter to drain pericardial fluid"},
+    {q:"What is the main nursing intervention for CHF activity tolerance?",options:["Strict bed rest","Encourage 30 minutes of daily physical activity as tolerated","Discourage all activity","Only passive range of motion"],correct:"Encourage 30 minutes of daily physical activity as tolerated"},
+    {q:"What is the pathophysiology mechanism leading to infarction in MI?",options:["Increased oxygen supply","Atherosclerotic plaque rupture → thrombus → complete occlusion → cellular death","Vasospasm only","Inflammatory response without obstruction"],correct:"Atherosclerotic plaque rupture → thrombus → complete occlusion → cellular death"},
     {q:"What does aldosterone cause in CHF?",options:["Potassium retention","Sodium and fluid retention, increasing preload and workload","Vasodilation","Decreased heart rate"],correct:"Sodium and fluid retention, increasing preload and workload"},
     {q:"What is the priority intervention for suspected Beck's triad?",options:["Administer diuretics","Prepare for pericardiocentesis","Give anticoagulants","Encourage deep breathing"],correct:"Prepare for pericardiocentesis"},
     {q:"What vasopressor is used in cardiac arrest and cardiogenic shock?",options:["Insulin","Vasopressors (e.g., norepinephrine)","Anticoagulants","Diuretics"],correct:"Vasopressors (e.g., norepinephrine)"},
     {q:"What does 'electrical alternans' indicate?",options:["MI","Cardiac tamponade (varying QRS amplitude on ECG)","Complete heart block","Atrial fibrillation"],correct:"Cardiac tamponade (varying QRS amplitude on ECG)"},
-    {q:"What does beta-blockers do in CHF?",options:["Increase heart rate","Reduce heart rate and contractility","Increase sodium retention","Stimulate epinephrine release"],correct:"Reduce heart rate and contractility"},
+    {q:"What surgical incision into the pericardium to drain fluid is called?",options:["Pericardiocentesis","CABG","Pericardiotomy","Thoracotomy"],correct:"Pericardiotomy"},
+    {q:"How does the nurse reduce anxiety in CHF patients?",options:["Avoid explaining procedures","Provide comfort, psychological support, and patient education","Restrict family visits","Administer sedatives immediately"],correct:"Provide comfort, psychological support, and patient education"},
+    {q:"What is the nursing assessment for MI shortness of breath?",options:["Assess for dyspnea, tachypnea, and crackles","Ignore if patient can speak","Only pulse oximetry","Chest X-ray only"],correct:"Assess for dyspnea, tachypnea, and crackles"},
+    {q:"What does echocardiography show in massive PE?",options:["Left ventricular hypertrophy","Right heart strain and dilation due to increased pulmonary vascular resistance","Normal cardiac function","Left ventricular failure"],correct:"Right heart strain and dilation due to increased pulmonary vascular resistance"},
+    {q:"What is the nursing intervention for monitoring cardiac tamponade every 5–15 minutes?",options:["Blood glucose","Blood pressure, heart rate, and rhythm","Temperature only","Urine output only"],correct:"Blood pressure, heart rate, and rhythm"},
   ],
   lec89: [
     {q:"What does the RUQ of the abdomen contain?",options:["Appendix and cecum","Liver, gallbladder, duodenum, and right kidney","Sigmoid colon and left ovary","Stomach and spleen"],correct:"Liver, gallbladder, duodenum, and right kidney"},
     {q:"What is located in the LLQ of the abdomen?",options:["Liver and gallbladder","Appendix and right ureter","Sigmoid colon, left ovary, descending colon, left ureter","Stomach and pancreas"],correct:"Sigmoid colon, left ovary, descending colon, left ureter"},
     {q:"Appendicitis is located in which abdominal quadrant?",options:["RUQ","LUQ","LLQ","RLQ"],correct:"RLQ"},
+    {q:"Which of the following is a surgical cause of acute abdominal pain?",options:["Gastroenteritis","Pancreatitis","Ruptured ectopic pregnancy","Diabetic ketoacidosis"],correct:"Ruptured ectopic pregnancy"},
+    {q:"What does 'O' in OPQRST stand for?",options:["Origin","Onset","Obstruction","Output"],correct:"Onset"},
+    {q:"Mesenteric ischemia is classified under which cause category?",options:["Gynecological","Gastrointestinal","Vascular/Other","Urological"],correct:"Vascular/Other"},
+    {q:"A ruptured abdominal aortic aneurysm (AAA) is classified as which type of cause?",options:["Gastrointestinal","Urological","Vascular","Medical/non-surgical"],correct:"Vascular"},
+    {q:"What is pancreatitis classified as in terms of surgical management?",options:["Always surgical","Mostly medical/non-surgical","Always treated with antibiotics only","Requires immediate CABG"],correct:"Mostly medical/non-surgical"},
+    {q:"What is the pain goal in the NANDA care plan for acute abdominal pain?",options:["Pain 0/10 within 10 minutes","Pain ≤ 3/10 within 30 minutes","Pain ≤ 5/10 within 1 hour","Pain free within 2 hours"],correct:"Pain ≤ 3/10 within 30 minutes"},
+    {q:"What position is used in pain management for acute abdominal pain?",options:["Prone","Trendelenburg","Semi-Fowler's","Lateral decubitus"],correct:"Semi-Fowler's"},
+    {q:"What is the minimum urine output goal in the care plan for acute abdominal pain?",options:["0.1 mL/kg/hr","0.5 mL/kg/hr","1.0 mL/kg/hr","2.0 mL/kg/hr"],correct:"0.5 mL/kg/hr"},
+    {q:"Cholecystitis pain is typically located in which quadrant?",options:["LLQ","LUQ","RLQ","RUQ"],correct:"RUQ"},
+    {q:"Ovarian cyst pain would be located in which region?",options:["RUQ","LUQ","LLQ or RLQ depending on side","Epigastric only"],correct:"LLQ or RLQ depending on side"},
     {q:"What does visceral pain feel like?",options:["Sharp and well-localized","Dull, crampy, poorly localized from organ involvement","Burning only","Stabbing and radiating to limbs"],correct:"Dull, crampy, poorly localized from organ involvement"},
     {q:"What does somatic pain feel like in abdominal emergencies?",options:["Dull and poorly localized","Sharp, well-localized, worse with movement — from peritoneal irritation","Colicky only","No different from visceral"],correct:"Sharp, well-localized, worse with movement — from peritoneal irritation"},
     {q:"What is rebound tenderness a sign of?",options:["Normal finding","Peritoneal irritation","Musculoskeletal pain","Referred pain only"],correct:"Peritoneal irritation"},
+    {q:"Referred pain from MI or pneumonia can present as:",options:["Groin pain","Abdominal pain","Leg pain","Headache"],correct:"Abdominal pain"},
     {q:"Which investigation is gold standard for diagnosing most acute abdominal conditions?",options:["Plain X-ray","Ultrasound","CT scan of the abdomen","MRI"],correct:"CT scan of the abdomen"},
-    {q:"What is the minimum urine output goal in the care plan for acute abdominal pain?",options:["0.1 mL/kg/hr","0.5 mL/kg/hr","1.0 mL/kg/hr","2.0 mL/kg/hr"],correct:"0.5 mL/kg/hr"},
-    {q:"Cholecystitis pain is typically located in which quadrant?",options:["LLQ","LUQ","RLQ","RUQ"],correct:"RUQ"},
-    {q:"What does IAPP stand for in abdominal assessment?",options:["Inspection, Auscultation, Palpation, Percussion — in that order","Inspection, Aspiration, Percussion, Palpation","Initial Assessment, Pain, Pressure","Intervention, Assessment, Plan, Progress"],correct:"Inspection, Auscultation, Palpation, Percussion — in that order"},
+    {q:"What nursing intervention helps prevent infection post-operatively in abdominal surgery?",options:["Increase oral fluids","Aseptic wound care, monitor WBC and temperature, antibiotics as prescribed","Restrict ambulation","Apply cold packs"],correct:"Aseptic wound care, monitor WBC and temperature, antibiotics as prescribed"},
+    {q:"What is the nursing intervention for deficient fluid volume in acute abdominal pain?",options:["Oral rehydration only","IV fluid replacement; monitor I&O; assess mucous membranes, daily weights, electrolytes","Restrict all fluids","Diuretics"],correct:"IV fluid replacement; monitor I&O; assess mucous membranes, daily weights, electrolytes"},
+    {q:"Testicular torsion in males falls under which cause category?",options:["Gastrointestinal","Vascular","Urological/Gynecological","Medical/Non-surgical"],correct:"Urological/Gynecological"},
+    {q:"Pelvic inflammatory disease (PID) falls under which cause category?",options:["Gastrointestinal","Vascular","Urological/Gynecological","Surgical only"],correct:"Urological/Gynecological"},
+    {q:"What does 'R' in OPQRST stand for?",options:["Rate","Region/Radiation","Recurrence","Response"],correct:"Region/Radiation"},
+    {q:"What does 'S' in OPQRST stand for?",options:["Source","Severity","Symptoms","Screening"],correct:"Severity"},
+    {q:"In the NANDA plan, anxiety in acute abdominal pain is related to:",options:["Fluid loss","Diagnostic uncertainty, pain, and potential surgery","Post-operative infection","Medication side effects"],correct:"Diagnostic uncertainty, pain, and potential surgery"},
+    {q:"Diabetic ketoacidosis presenting as abdominal pain falls under which category?",options:["Surgical cause","Gastrointestinal cause","Medical/non-surgical cause","Vascular cause"],correct:"Medical/non-surgical cause"},
     {q:"The stomach and spleen are located in which quadrant?",options:["RUQ","LLQ","RLQ","LUQ"],correct:"LUQ"},
-    {q:"What is the significance of rigidity of the abdomen in acute abdominal pain?",options:["Normal finding after meals","Sign of peritoneal irritation (peritonitis)","Indicates constipation only","Indicates gastric ulcer"],correct:"Sign of peritoneal irritation (peritonitis)"},
+    {q:"What does IAPP stand for in abdominal assessment?",options:["Inspection, Auscultation, Palpation, Percussion — in that order","Inspection, Aspiration, Percussion, Palpation","Initial Assessment, Pain, Pressure","Intervention, Assessment, Plan, Progress"],correct:"Inspection, Auscultation, Palpation, Percussion — in that order"},
+    {q:"Bowel obstruction (SBO/LBO) falls under which cause category?",options:["Urological","Vascular","Gastrointestinal","Medical/Non-surgical"],correct:"Gastrointestinal"},
+    {q:"Which abdominal condition is associated with the highest mortality risk if untreated?",options:["Gastroenteritis","Mesenteric ischemia and ruptured AAA","Renal colic","UTI"],correct:"Mesenteric ischemia and ruptured AAA"},
+    {q:"What does the 'T' in OPQRST stand for?",options:["Treatment","Time of onset","Type of pain","Temperature"],correct:"Time of onset"},
+    {q:"Splenic rupture is classified under which cause category?",options:["Gastrointestinal","Urological","Vascular/Other","Medical"],correct:"Vascular/Other"},
+    {q:"What does semi-Fowler's position do for acute abdominal pain management?",options:["Increases intra-abdominal pressure","Reduces diaphragm pressure and promotes comfort","Increases venous return","Worsens pain"],correct:"Reduces diaphragm pressure and promotes comfort"},
+    {q:"What type of pain is described as poorly localized and coming from abdominal organs?",options:["Somatic","Referred","Visceral","Neuropathic"],correct:"Visceral"},
+    {q:"Ureteral stone falls under which abdominal cause category?",options:["Gastrointestinal","Vascular","Urological/Gynecological","Medical/Non-surgical"],correct:"Urological/Gynecological"},
+    {q:"The pancreas is located in which quadrant?",options:["RUQ","RLQ","LUQ","LLQ"],correct:"LUQ"},
+    {q:"Which nursing diagnosis is 'Risk for Deficient Fluid Volume' related to in abdominal pain?",options:["Tissue inflammation","Vomiting, fever, NPO status, and hemorrhage","Anxiety","Surgical incision only"],correct:"Vomiting, fever, NPO status, and hemorrhage"},
+    {q:"What diagnostic test confirms inflammation/infection in acute abdominal conditions?",options:["ECG","Elevated WBC count","Urine specific gravity","Chest X-ray"],correct:"Elevated WBC count"},
+    {q:"Which of these is a non-pharmacologic measure for acute abdominal pain?",options:["IV morphine","Positioning and distraction techniques","NSAID injection","Surgical drainage"],correct:"Positioning and distraction techniques"},
+    {q:"Diverticulitis is a gastrointestinal cause located commonly in which area?",options:["Right colon","Transverse colon","Left colon/sigmoid","Rectum"],correct:"Left colon/sigmoid"},
     {q:"What is the definition of GI hemorrhage?",options:["Inflammation of the gastric mucosa","Bleeding originating from any part of the gastrointestinal tract","Blood in urine","Lung hemorrhage"],correct:"Bleeding originating from any part of the gastrointestinal tract"},
     {q:"Upper GI bleeding originates from:",options:["Below the ligament of Treitz","Above the ligament of Treitz (esophagus, stomach, duodenum)","The colon only","The rectum"],correct:"Above the ligament of Treitz (esophagus, stomach, duodenum)"},
+    {q:"Lower GI bleeding originates from:",options:["Esophagus and stomach","Small bowel only","Below the ligament of Treitz (colon, rectum)","Liver and spleen"],correct:"Below the ligament of Treitz (colon, rectum)"},
     {q:"What is hematemesis?",options:["Blood in stool","Vomiting of blood","Blood in urine","Coughing of blood"],correct:"Vomiting of blood"},
     {q:"What is melena?",options:["Bright red blood per rectum","Black, tarry stool from digested blood (upper GI source)","Blood in vomit","Yellow stool"],correct:"Black, tarry stool from digested blood (upper GI source)"},
     {q:"What is hematochezia?",options:["Black tarry stool","Bright red blood per rectum (lower GI source)","Vomiting blood","Blood in urine"],correct:"Bright red blood per rectum (lower GI source)"},
     {q:"What is the MOST common cause of upper GI bleeding?",options:["Colon cancer","Peptic ulcer disease","Diverticulosis","Anal fissure"],correct:"Peptic ulcer disease"},
     {q:"Which diagnostic procedure is the gold standard for upper GI bleeding?",options:["CT scan","Plain X-ray","Esophagogastroduodenoscopy (EGD/upper endoscopy)","Colonoscopy"],correct:"Esophagogastroduodenoscopy (EGD/upper endoscopy)"},
+    {q:"What is the initial nursing priority for a patient with GI hemorrhage?",options:["Administer antacids","Ensure IV access, fluid resuscitation, and monitor vital signs","Prepare for surgery","Administer PPIs orally"],correct:"Ensure IV access, fluid resuscitation, and monitor vital signs"},
+    {q:"What does NPO status mean in GI hemorrhage management?",options:["Normal per oral (eat and drink freely)","Nothing by mouth","Night-time per oral only","Non-pharmacological only"],correct:"Nothing by mouth"},
     {q:"What hemoglobin level is the transfusion trigger in the GI hemorrhage care plan?",options:["Hgb < 10 g/dL","Hgb ≥ 7 g/dL (transfuse when below 7)","Hgb < 12 g/dL","Hgb < 5 g/dL"],correct:"Hgb ≥ 7 g/dL (transfuse when below 7)"},
     {q:"What is the SpO2 target in GI hemorrhage tissue perfusion management?",options:["SpO2 ≥ 85%","SpO2 ≥ 90%","SpO2 ≥ 95%","SpO2 ≥ 99%"],correct:"SpO2 ≥ 95%"},
     {q:"What is the role of IV PPI in GI hemorrhage nursing management?",options:["Reduce pain","Reduce gastric acid secretion to promote ulcer healing and reduce re-bleeding","Replace blood volume","Treat infection"],correct:"Reduce gastric acid secretion to promote ulcer healing and reduce re-bleeding"},
+    {q:"What nursing diagnosis is related to active blood loss in GI hemorrhage?",options:["Anxiety","Risk for infection","Deficient fluid volume","Acute pain from surgical incision"],correct:"Deficient fluid volume"},
+    {q:"What does Foley catheter insertion allow in GI hemorrhage?",options:["Pain assessment","Hourly urine output monitoring as fluid balance indicator","Temperature monitoring","Medication administration"],correct:"Hourly urine output monitoring as fluid balance indicator"},
+    {q:"What is the 'Risk for Ineffective Tissue Perfusion' related to in GI hemorrhage?",options:["Pain","Decreased cardiac output from blood loss","Anxiety","NPO status"],correct:"Decreased cardiac output from blood loss"},
+    {q:"Which of the following elevates re-bleeding risk after upper GI hemorrhage?",options:["Low gastric acid","H. pylori infection, NSAIDs, anticoagulants, liver disease","High-fiber diet","Regular exercise"],correct:"H. pylori infection, NSAIDs, anticoagulants, liver disease"},
+    {q:"What is the Rockall score used for?",options:["Assessing pain severity","Predicting re-bleeding risk and mortality in upper GI bleeding","Grading severity of frostbite","Triage classification"],correct:"Predicting re-bleeding risk and mortality in upper GI bleeding"},
+    {q:"What position should be elevated in GI hemorrhage tissue perfusion management?",options:["Flat supine","Head of bed (HOB) elevated 30°","Trendelenburg","Prone"],correct:"Head of bed (HOB) elevated 30°"},
+    {q:"What does variceal bleeding indicate in terms of underlying pathology?",options:["Peptic ulcer disease","Portal hypertension (commonly from liver cirrhosis)","Colon cancer","Renal disease"],correct:"Portal hypertension (commonly from liver cirrhosis)"},
+    {q:"What complication can result from massive GI hemorrhage?",options:["Hypertension","Hypovolemic shock, multi-organ failure","Polycythemia","Hyperglycemia"],correct:"Hypovolemic shock, multi-organ failure"},
     {q:"What type of fluid is used for initial resuscitation in GI hemorrhage?",options:["5% dextrose","Isotonic IV fluids (normal saline or Ringer's lactate)","Hypotonic saline","D5W only"],correct:"Isotonic IV fluids (normal saline or Ringer's lactate)"},
     {q:"What is the significance of 'coffee-ground' vomit in upper GI bleeding?",options:["Fresh active bleeding","Older blood that has been partially digested by gastric acid","Normal finding after spicy food","Indicates lower GI bleed"],correct:"Older blood that has been partially digested by gastric acid"},
-    {q:"What does variceal bleeding indicate in terms of underlying pathology?",options:["Peptic ulcer disease","Portal hypertension (commonly from liver cirrhosis)","Colon cancer","Renal disease"],correct:"Portal hypertension (commonly from liver cirrhosis)"},
+    {q:"Which of the following increases mortality risk in GI hemorrhage?",options:["Young age","Comorbidities (liver disease, renal failure, coagulopathy), hemodynamic instability","Mild bleeding only","Normal vital signs"],correct:"Comorbidities (liver disease, renal failure, coagulopathy), hemodynamic instability"},
     {q:"What is the significance of orthostatic hypotension in GI hemorrhage?",options:["Normal finding","Indicates significant blood loss (>15–20%)","Indicates infection","Indicates hypertension"],correct:"Indicates significant blood loss (>15–20%)"},
+    {q:"Which medication class is associated with increased risk of GI hemorrhage?",options:["Antihypertensives","NSAIDs and anticoagulants","Antidiabetics","Diuretics"],correct:"NSAIDs and anticoagulants"},
+    {q:"What does MAP monitoring help assess in GI hemorrhage?",options:["Renal function","Adequacy of organ perfusion pressure","Pain level","Respiratory function"],correct:"Adequacy of organ perfusion pressure"},
     {q:"Lower GI bleeding is MOST commonly caused by:",options:["Peptic ulcer","Varices","Diverticulosis, angiodysplasia, colorectal cancer","Esophageal tear"],correct:"Diverticulosis, angiodysplasia, colorectal cancer"},
-    {q:"What complication can result from massive GI hemorrhage?",options:["Hypertension","Hypovolemic shock, multi-organ failure","Polycythemia","Hyperglycemia"],correct:"Hypovolemic shock, multi-organ failure"},
+    {q:"What does CVP monitoring help assess in GI hemorrhage?",options:["Pain level","Volume status and fluid resuscitation adequacy","Blood glucose","Temperature"],correct:"Volume status and fluid resuscitation adequacy"},
+    {q:"Esophageal varices bleed because:",options:["Atherosclerosis of esophageal arteries","Portal hypertension causes dilation and rupture of esophageal veins","Infection of the esophagus","Trauma only"],correct:"Portal hypertension causes dilation and rupture of esophageal veins"},
+    {q:"What is the acute pain goal in the GI hemorrhage care plan?",options:["No pain immediately","Pain ≤ 3/10 within 1 hour","Pain free within 30 minutes","Pain ≤ 5/10 within 2 hours"],correct:"Pain ≤ 3/10 within 1 hour"},
+    {q:"What test is most useful for assessing ongoing blood loss in GI hemorrhage?",options:["Urine analysis","Serial hemoglobin/hematocrit and vital sign trends","ECG","Liver function tests only"],correct:"Serial hemoglobin/hematocrit and vital sign trends"},
+    {q:"What does 'hemodynamically stable' mean in GI hemorrhage?",options:["No pain","Adequate blood pressure, pulse, and perfusion despite bleeding","No bleeding on endoscopy","Normal hemoglobin"],correct:"Adequate blood pressure, pulse, and perfusion despite bleeding"},
+    {q:"What surgical intervention may be needed in uncontrolled GI hemorrhage?",options:["Appendectomy only","Surgical hemostasis or bowel resection","Cardiac bypass","Nephrectomy"],correct:"Surgical hemostasis or bowel resection"},
+    {q:"What is the role of proton pump inhibitors (PPIs) in GI hemorrhage?",options:["Vasoconstriction","Reduce gastric acid to protect the bleeding site and reduce re-bleeding","Increase clotting","Replace lost blood"],correct:"Reduce gastric acid to protect the bleeding site and reduce re-bleeding"},
+    {q:"What is the priority nursing action when a GI hemorrhage patient becomes hemodynamically unstable?",options:["Administer oral PPI","Report changes immediately, ensure IV access, administer ordered fluids/blood","Apply warm compresses","Prepare for discharge"],correct:"Report changes immediately, ensure IV access, administer ordered fluids/blood"},
+    {q:"Which of the following is an epidemiological risk factor for GI hemorrhage?",options:["Young age without comorbidities","Alcohol use, smoking, NSAIDs, H. pylori, liver cirrhosis","Vegetarian diet","Low stress lifestyle"],correct:"Alcohol use, smoking, NSAIDs, H. pylori, liver cirrhosis"},
+    {q:"What is the nursing assessment frequency for a patient with active GI hemorrhage?",options:["Every 8 hours","Continuous monitoring with frequent reassessment","Once per shift","Only when patient complains"],correct:"Continuous monitoring with frequent reassessment"},
+    {q:"Blood transfusion in GI hemorrhage is guided by:",options:["Symptoms only","Hemoglobin level, hemodynamic stability, and ongoing blood loss","Patient preference","Age only"],correct:"Hemoglobin level, hemodynamic stability, and ongoing blood loss"},
+    {q:"What does 'non-pharmacologic measures' for acute pain include in GI hemorrhage?",options:["IV opioids","Positioning for comfort, distraction, relaxation techniques","Surgical drainage","NPO status only"],correct:"Positioning for comfort, distraction, relaxation techniques"},
+    {q:"Why is family presence allowed in GI hemorrhage anxiety management?",options:["Hospital policy only","Reduces patient anxiety and provides emotional support","Provides nursing assistance","Improves hemodynamics"],correct:"Reduces patient anxiety and provides emotional support"},
   ],
   trauma: [
     {q:"What is flail chest?",options:["A single rib fracture","Two or more adjacent ribs fractured in multiple places creating a free-floating segment","Puncture of the lung","Fracture of the sternum only"],correct:"Two or more adjacent ribs fractured in multiple places creating a free-floating segment"},
     {q:"What is paradoxical movement in flail chest?",options:["Flail segment moves normally","Flail segment moves opposite to the rest of the chest wall","Flail segment does not move","Only occurs during expiration"],correct:"Flail segment moves opposite to the rest of the chest wall"},
     {q:"During inspiration in flail chest, the flail segment moves:",options:["Outward with chest expansion","Inward due to negative pressure","Remains stationary","Upward only"],correct:"Inward due to negative pressure"},
+    {q:"During expiration in flail chest, the flail segment moves:",options:["Inward with chest recoil","Outward paradoxically","Stays fixed","Downward only"],correct:"Outward paradoxically"},
     {q:"What is the gold standard diagnostic for flail chest?",options:["Chest X-ray","CT thorax showing exact fracture location and lung contusion","ABG only","ECG"],correct:"CT thorax showing exact fracture location and lung contusion"},
+    {q:"What ABG finding confirms hypoxia in flail chest?",options:["Increased PaO2","Decreased PaO2 and increased PaCO2 (hypercapnia)","Normal ABG","Increased bicarbonate"],correct:"Decreased PaO2 and increased PaCO2 (hypercapnia)"},
     {q:"What is pneumothorax?",options:["Fluid in the pleural space","Accumulation of air in the pleural space causing lung collapse","Infection of the pleura","Blood in pleural space"],correct:"Accumulation of air in the pleural space causing lung collapse"},
+    {q:"What is a spontaneous pneumothorax caused by?",options:["Trauma","Rupture of pulmonary blebs (weakened alveolar clusters)","Infection","Surgery"],correct:"Rupture of pulmonary blebs (weakened alveolar clusters)"},
+    {q:"What is an open pneumothorax characterized by?",options:["Silent entry of air","Air enters during inspiration producing a 'sucking' sound; lung collapses","Blood entry into chest","Gradual air accumulation only"],correct:"Air enters during inspiration producing a 'sucking' sound; lung collapses"},
     {q:"What is a tension pneumothorax?",options:["Air leaks in and out freely","Air leaks into pleural space through a one-way valve, progressively compressing the lung and heart","Spontaneous resolution","Bilateral open pneumothorax"],correct:"Air leaks into pleural space through a one-way valve, progressively compressing the lung and heart"},
     {q:"What is a basal skull fracture?",options:["Fracture of the facial bones only","A break in the bone at the base of the skull in the floor near eyes, ears, nose, or top of neck","Fracture of the mandible","Cervical spine fracture"],correct:"A break in the bone at the base of the skull in the floor near eyes, ears, nose, or top of neck"},
     {q:"What are the types of spinal cord injury mechanisms?",options:["Crush and blast only","Flexion, flexion-rotation, penetration, and hyperextension injuries","Only compression and distraction","Rotation and lateral bending only"],correct:"Flexion, flexion-rotation, penetration, and hyperextension injuries"},
+    {q:"What is the purpose of immobilizing the spine immediately in spinal cord injury?",options:["Relieve pain only","Prevent further cord damage by stabilizing the injury","Allow the patient to ambulate","Assess neurological deficit only"],correct:"Prevent further cord damage by stabilizing the injury"},
     {q:"What is the MAP target maintained in spinal cord injury?",options:["60–70 mmHg","70–75 mmHg","85–90 mmHg for spinal cord perfusion","Over 100 mmHg"],correct:"85–90 mmHg for spinal cord perfusion"},
     {q:"What vasopressor is used for neurogenic shock in spinal cord injury?",options:["Epinephrine","Norepinephrine","Dopamine only","Vasopressin"],correct:"Norepinephrine"},
     {q:"What pharmacological agent is controversially given within 8 hours of spinal cord injury?",options:["Aspirin","High-dose methylprednisolone","Morphine only","Anticoagulants"],correct:"High-dose methylprednisolone"},
     {q:"What DVT prevention is used in spinal cord injury?",options:["Aspirin only","LMWH (low-molecular weight heparin) anticoagulation","Warfarin","No prophylaxis needed"],correct:"LMWH (low-molecular weight heparin) anticoagulation"},
     {q:"What is a laminectomy used for in spinal cord injury surgery?",options:["Spinal fusion","Decompression of the spinal cord","Insertion of spinal rods only","Removal of hematoma only"],correct:"Decompression of the spinal cord"},
+    {q:"When is early surgery (< 24 hours) preferred in spinal cord injury?",options:["Never; delayed surgery is better","Early surgery (< 24 hrs) leads to better neurological outcomes","Only for stable patients","Only for level C injuries"],correct:"Early surgery (< 24 hrs) leads to better neurological outcomes"},
+    {q:"What is the role of a nasogastric tube in spinal cord injury management?",options:["Nutrition only","Prevent aspiration in spinal ileus","Administer steroids","Monitor gastric pH"],correct:"Prevent aspiration in spinal ileus"},
     {q:"What is used to prevent stress ulcers in spinal cord injury?",options:["Antacids only","Proton pump inhibitors (PPIs)","H2 blockers only","No prophylaxis"],correct:"Proton pump inhibitors (PPIs)"},
+    {q:"What analgesic is used for pain in spinal cord injury?",options:["Aspirin only","IV morphine or paracetamol","Ibuprofen IV","Codeine tablets"],correct:"IV morphine or paracetamol"},
     {q:"What does crepitus on palpation of the chest indicate in flail chest?",options:["Normal finding","Rib fractures and subcutaneous emphysema","Pneumonia","Cardiac contusion only"],correct:"Rib fractures and subcutaneous emphysema"},
+    {q:"What tachypnea rate is considered abnormal in flail chest assessment?",options:["> 12/min","> 16/min","> 20/min (tachypnea)","> 30/min only"],correct:"> 20/min (tachypnea)"},
+    {q:"What does cyanosis indicate in flail chest?",options:["Normal skin color","Blue discoloration of lips/fingernails indicating severe hypoxia","Early sign of hypoxia","Only seen in children"],correct:"Blue discoloration of lips/fingernails indicating severe hypoxia"},
+    {q:"Which investigation rules out cardiac contusion associated with chest trauma?",options:["Chest X-ray","ECG","CT thorax","ABG"],correct:"ECG"},
+    {q:"What does spinal stabilization surgery involve?",options:["Only immobilization","Rods, screws, and fusion to stabilize the spine","Laminectomy alone","Physical therapy only"],correct:"Rods, screws, and fusion to stabilize the spine"},
+    {q:"What anticonvulsant is used in spinal cord injury?",options:["Phenobarbital always","Anticonvulsants if neuropathic pain or seizures are present","Routine anticonvulsants for all","Benzodiazepines only"],correct:"Anticonvulsants if neuropathic pain or seizures are present"},
+    {q:"What urinary catheter insertion prevents in spinal cord injury?",options:["Infection","Urinary retention due to loss of bladder control","Pain","Blood loss"],correct:"Urinary retention due to loss of bladder control"},
+    {q:"A patient with chest trauma has visible paradoxical chest wall movement and severe dyspnea. The most likely diagnosis is:",options:["Pneumothorax","Hemothorax","Flail chest","Cardiac tamponade"],correct:"Flail chest"},
     {q:"What does 'penetrating injury' to spinal cord involve surgically?",options:["Fusion only","Fragment removal","Laminectomy only","No surgery needed"],correct:"Fragment removal"},
+    {q:"Which spinal cord injury mechanism involves forward bending of the spine?",options:["Hyperextension","Flexion injury","Penetration","Lateral bending"],correct:"Flexion injury"},
     {q:"What is the significance of neurogenic shock in spinal cord injury?",options:["Increased blood pressure from cord injury","Hypotension due to loss of sympathetic tone below injury level","Bradycardia alone","Hypertension and tachycardia"],correct:"Hypotension due to loss of sympathetic tone below injury level"},
+    {q:"What does aggressive IV fluid resuscitation address in spinal cord injury?",options:["Infection","Hemodynamic instability from neurogenic shock","Pain","Fever"],correct:"Hemodynamic instability from neurogenic shock"},
+    {q:"How does flail chest impair ventilation?",options:["By blocking airways","By reversing the normal mechanics — paradoxical movement reduces effective tidal volume","By filling alveoli with fluid","By compressing the heart"],correct:"By reversing the normal mechanics — paradoxical movement reduces effective tidal volume"},
     {q:"What is the immediate management priority for an open pneumothorax?",options:["Insert chest tube only","Seal the wound (3-sided occlusive dressing) and monitor for tension pneumothorax","Give 100% O2 only","Perform CPR"],correct:"Seal the wound (3-sided occlusive dressing) and monitor for tension pneumothorax"},
+    {q:"What does 'flexion-rotation injury' cause to spinal cord?",options:["Simple compression only","Tearing of posterior ligaments with rotational instability","Anterior cord syndrome only","No injury"],correct:"Tearing of posterior ligaments with rotational instability"},
+    {q:"What does 'hyperextension injury' to the spine involve?",options:["Forward bending","Backward bending beyond normal range, damaging posterior structures","Penetrating trauma","Lateral compression"],correct:"Backward bending beyond normal range, damaging posterior structures"},
     {q:"What is the first step in managing a suspected spinal injury at the scene?",options:["Remove the helmet","Immobilize spine immediately with rigid collar and logroll technique","Administer high-dose steroids","Insert IV immediately"],correct:"Immobilize spine immediately with rigid collar and logroll technique"},
-    {q:"A patient with trauma has 'sucking chest wound' sound on inspiration. This indicates:",options:["Flail chest","Open pneumothorax","Hemothorax","Tension pneumothorax"],correct:"Open pneumothorax"},
+    {q:"Which ECG finding is associated with right heart strain from massive PE?",options:["LBBB","S1Q3T3 pattern","ST elevation in leads II, III, aVF","Delta waves"],correct:"S1Q3T3 pattern"},
+    {q:"What is the MOST important initial intervention in flail chest?",options:["Apply ice packs","Ensure oxygenation and consider positive pressure ventilation if ventilation is compromised","Administer antibiotics","Give oral fluids"],correct:"Ensure oxygenation and consider positive pressure ventilation if ventilation is compromised"},
     {q:"What is a clinical sign of basal skull fracture?",options:["Midface swelling only","Periorbital ecchymosis (raccoon eyes), Battle's sign, CSF leakage from ears/nose","Jaw pain only","Scalp laceration"],correct:"Periorbital ecchymosis (raccoon eyes), Battle's sign, CSF leakage from ears/nose"},
+    {q:"What does 'post-op continued neurological monitoring' after spinal surgery assess?",options:["Only blood pressure","Changes in motor, sensory, and reflex function indicating cord recovery or new deficit","Only pain levels","Only wound healing"],correct:"Changes in motor, sensory, and reflex function indicating cord recovery or new deficit"},
     {q:"What does a tension pneumothorax compress in addition to the lung?",options:["Only the lung on one side","Lung and mediastinum including the heart, causing hemodynamic compromise","The diaphragm only","The trachea only"],correct:"Lung and mediastinum including the heart, causing hemodynamic compromise"},
     {q:"What breathing pattern is seen in flail chest?",options:["Deep, slow regular breathing","Rapid, shallow breathing with visible paradoxical movement","Only labored breathing without paradoxical movement","Kussmaul breathing"],correct:"Rapid, shallow breathing with visible paradoxical movement"},
-    {q:"A patient with chest trauma has visible paradoxical chest wall movement and severe dyspnea. The most likely diagnosis is:",options:["Pneumothorax","Hemothorax","Flail chest","Cardiac tamponade"],correct:"Flail chest"},
-    {q:"What is the MOST important initial intervention in flail chest?",options:["Apply ice packs","Ensure oxygenation and consider positive pressure ventilation if ventilation is compromised","Administer antibiotics","Give oral fluids"],correct:"Ensure oxygenation and consider positive pressure ventilation if ventilation is compromised"},
-    {q:"Which ECG finding is associated with right heart strain from massive PE?",options:["LBBB","S1Q3T3 pattern","ST elevation in leads II, III, aVF","Delta waves"],correct:"S1Q3T3 pattern"},
-    {q:"What does 'hyperextension injury' to the spine involve?",options:["Forward bending","Backward bending beyond normal range, damaging posterior structures","Penetrating trauma","Lateral compression"],correct:"Backward bending beyond normal range, damaging posterior structures"},
-  ]
+    {q:"What does discharge planning for spinal cord injury patients include?",options:["No special education needed","Patient and family education, rehabilitation planning, pressure ulcer prevention, bladder/bowel management","Only medication instructions","Only physical therapy"],correct:"Patient and family education, rehabilitation planning, pressure ulcer prevention, bladder/bowel management"},
+    {q:"A patient with trauma has 'sucking chest wound' sound on inspiration. This indicates:",options:["Flail chest","Open pneumothorax","Hemothorax","Tension pneumothorax"],correct:"Open pneumothorax"},
+    {q:"In flail chest, what does CT thorax confirm that a chest X-ray cannot?",options:["Rib fractures only","Exact fracture location AND associated lung contusion extent","Only pneumothorax","Cardiac contusion"],correct:"Exact fracture location AND associated lung contusion extent"},
+    {q:"Which of the following is a primary nursing goal in chest trauma?",options:["Control hypertension","Optimize oxygenation and ventilation, pain management, and early detection of complications","Reduce cardiac output","Maintain low blood pressure"],correct:"Optimize oxygenation and ventilation, pain management, and early detection of complications"},
+    {q:"Which analgesic approach is used cautiously in spinal cord injury to avoid hypotension?",options:["IV morphine: used but cautiously as opioids can worsen hypotension","Aspirin freely","No analgesia","Only general anesthesia"],correct:"IV morphine: used but cautiously as opioids can worsen hypotension"},
+    {q:"What does 'apply evidence-based criteria to evaluate patient outcomes' mean in trauma nursing?",options:["Use outdated protocols","Measure patient outcomes against current best-practice nursing interventions and standards","Use only physician guidelines","Document only complications"],correct:"Measure patient outcomes against current best-practice nursing interventions and standards"},
+  ],
 };
 
 let answeredCount = 0;
@@ -522,6 +954,32 @@ function renderQuestions(tabId) {
 currentTotal = examData['lec2'] ? examData['lec2'].length : 0;
 renderQuestions('lec2');
 updateMeter();
+
+function openDonate() {
+  document.getElementById('donateOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeDonate() {
+  document.getElementById('donateOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function closeDonateOutside(e) {
+  if (e.target === document.getElementById('donateOverlay')) closeDonate();
+}
+
+function copyNum(text, btn) {
+  navigator.clipboard.writeText(text).then(() => {
+    const orig = btn.innerHTML;
+    btn.innerHTML = '<i class="fa-solid fa-check"></i> Copied!';
+    btn.classList.add('copied');
+    setTimeout(() => {
+      btn.innerHTML = orig;
+      btn.classList.remove('copied');
+    }, 2000);
+  });
+}
 </script>
 </body>
 </html>
