@@ -915,6 +915,19 @@
       <div class="card-count" id="count-trauma"></div>
       <div class="card-arrow"><i class="fa-solid fa-chevron-right"></i></div>
     </div>
+
+    <div class="module-card cyan" onclick="enterExam('respiratory', 'Respiratory Emergencies', 'Pulmonary & Gas Exchange', 'fa-lungs')">
+      <div class="card-glow"></div>
+      <div class="card-icon-section">
+        <i class="fa-solid fa-lungs card-icon"></i>
+      </div>
+      <div class="card-content">
+        <div class="card-title">Respiratory Emergencies</div>
+        <div class="card-subtitle">Pulmonary & Gas Exchange · MCQ</div>
+      </div>
+      <div class="card-count" id="count-respiratory"></div>
+      <div class="card-arrow"><i class="fa-solid fa-chevron-right"></i></div>
+    </div>
   </div>
 
   <div style="margin-top: 40px;">
@@ -1352,6 +1365,58 @@ const examData = {
     {q:"Which of the following is a primary nursing goal in chest trauma?",options:["Control hypertension","Optimize oxygenation and ventilation, pain management, and early detection of complications","Reduce cardiac output","Maintain low blood pressure"],correct:"Optimize oxygenation and ventilation, pain management, and early detection of complications"},
     {q:"Which analgesic approach is used cautiously in spinal cord injury to avoid hypotension?",options:["IV morphine: used but cautiously as opioids can worsen hypotension","Aspirin freely","No analgesia","Only general anesthesia"],correct:"IV morphine: used but cautiously as opioids can worsen hypotension"},
     {q:"What does 'apply evidence-based criteria to evaluate patient outcomes' mean in trauma nursing?",options:["Use outdated protocols","Measure patient outcomes against current best-practice nursing interventions and standards","Use only physician guidelines","Document only complications"],correct:"Measure patient outcomes against current best-practice nursing interventions and standards"},
+  ],
+  respiratory: [
+    {q:"What is the definition of respiration?",options:["Movement of air in and out of the lungs","The exchange of gases between a living organism and the environment","Circulation of blood through the pulmonary capillaries","Diffusion of oxygen across the alveolar membrane"],correct:"The exchange of gases between a living organism and the environment"},
+    {q:"What is the definition of ventilation?",options:["Gas exchange between alveoli and blood","Circulation of blood through the lungs","Mechanical process that moves air in and out of the lungs","Diffusion of gases across the alveolar membrane"],correct:"Mechanical process that moves air in and out of the lungs"},
+    {q:"Which of the following is a cause of ventilation alteration?",options:["Pulmonary embolism","Anemia","Upper airway obstruction","Shock"],correct:"Upper airway obstruction"},
+    {q:"Which of the following is also a cause of ventilation alteration?",options:["Inadequate blood volume","Neurogenic dysfunction","Pulmonary edema","Low hemoglobin"],correct:"Neurogenic dysfunction"},
+    {q:"What are the two key interventions for ventilation problems?",options:["Administer oxygen and diuretics","Ensure airways are open and unobstructed; provide assisted ventilation","Give antithrombotic drugs and monitor vitals","Elevate head of bed and give bronchodilators"],correct:"Ensure airways are open and unobstructed; provide assisted ventilation"},
+    {q:"What is diffusion in the context of respiration?",options:["Circulation of blood through the pulmonary capillary bed","Movement of air in and out of the lungs","Gas exchange between the air-filled alveoli and the pulmonary capillary bed","Transport of oxygen by hemoglobin"],correct:"Gas exchange between the air-filled alveoli and the pulmonary capillary bed"},
+    {q:"Diffusion is driven by which principle?",options:["Active transport from low to high concentration","Simple diffusion from high concentration to low concentration until equal","Osmosis across a semi-permeable membrane","Pressure-driven bulk flow"],correct:"Simple diffusion from high concentration to low concentration until equal"},
+    {q:"Which of the following causes diffusion alteration?",options:["Neurogenic dysfunction","Chest wall impairment","Pulmonary edema","Inadequate blood volume"],correct:"Pulmonary edema"},
+    {q:"Fire and CO poisoning cause alteration in which respiratory process?",options:["Ventilation","Perfusion","Diffusion","Circulation"],correct:"Diffusion"},
+    {q:"What are the two main interventions for diffusion problems?",options:["Provide assisted ventilation and open airways","Ensure adequate blood volume and Hgb","Provide high-flow O2 and reduce inflammation of interstitial space","Administer antithrombotic drugs and elevate head of bed"],correct:"Provide high-flow O2 and reduce inflammation of interstitial space"},
+    {q:"What is perfusion in the respiratory context?",options:["Movement of air into alveoli","Gas exchange between alveoli and capillaries","Circulating blood through the pulmonary capillary bed","Mechanical ventilation support"],correct:"Circulating blood through the pulmonary capillary bed"},
+    {q:"Which of the following causes perfusion alteration?",options:["Foreign body obstruction","Epiglottitis","Pulmonary embolus","Alveolar pathology"],correct:"Pulmonary embolus"},
+    {q:"Shock and anemia cause alteration in which respiratory process?",options:["Ventilation","Diffusion","Perfusion","Both ventilation and diffusion"],correct:"Perfusion"},
+    {q:"What are the two main interventions for perfusion problems?",options:["Provide high-flow O2 and reduce interstitial inflammation","Ensure adequate circulating volume and Hgb levels; optimize left-sided heart function","Open airways and provide assisted ventilation","Administer antithrombotics and monitor cardiac rhythm"],correct:"Ensure adequate circulating volume and Hgb levels; optimize left-sided heart function"},
+    {q:"What does an assessment review of respiratory emergency include?",options:["Only vital signs and ECG","Initial assessment, recognition of life threats, focused history, and physical exam","Laboratory tests and imaging only","Medication history and allergy assessment only"],correct:"Initial assessment, recognition of life threats, focused history, and physical exam"},
+    {q:"What is a pulmonary embolism (PE)?",options:["Accumulation of fluid in the lung tissue","Rupture of pulmonary blebs causing lung collapse","A blood clot, fat, or amniotic fluid blocking pulmonary vessels","Infection of the lung parenchyma"],correct:"A blood clot, fat, or amniotic fluid blocking pulmonary vessels"},
+    {q:"Where do more than 90% of pulmonary emboli originate?",options:["Iliac veins","Subclavian vein","Deep venous thromboses (DVTs) in the femoral vein","Renal veins"],correct:"Deep venous thromboses (DVTs) in the femoral vein"},
+    {q:"Which of the following is a risk factor for pulmonary embolism?",options:["Regular exercise","Low body weight","Prolonged immobilization","Hypotension"],correct:"Prolonged immobilization"},
+    {q:"Which condition is a known risk factor for PE?",options:["Hypoglycemia","Coagulopathy","Bradycardia","Hyponatremia"],correct:"Coagulopathy"},
+    {q:"Long bone fractures are a risk factor for PE because they can cause:",options:["Venous spasm","Fat embolism","Air embolism","Arterial thrombosis"],correct:"Fat embolism"},
+    {q:"Which sign is part of respiratory distress in pulmonary embolism?",options:["Bradycardia","Bounding pulse","Shallow respiration and tachycardia","Deep regular breathing"],correct:"Shallow respiration and tachycardia"},
+    {q:"What type of sputum is associated with pulmonary embolism?",options:["Yellow purulent sputum","Green frothy sputum","Blood-tinged sputum","Clear watery sputum"],correct:"Blood-tinged sputum"},
+    {q:"Hypoxia in PE can manifest as:",options:["Bradypnea and lethargy","Restlessness, headache, pallor or cyanosis, and behavioral changes","Hypertension and bradycardia","Decreased respiratory rate"],correct:"Restlessness, headache, pallor or cyanosis, and behavioral changes"},
+    {q:"What cardiac complication can PE cause?",options:["Left ventricular hypertrophy","Aortic dissection","Dysrhythmias","Mitral valve stenosis"],correct:"Dysrhythmias"},
+    {q:"Engorged neck veins in PE are a sign of:",options:["Hypovolemia","Right-sided heart strain and increased venous pressure","Left ventricular failure","Peripheral vasodilation"],correct:"Right-sided heart strain and increased venous pressure"},
+    {q:"Which diagnostic test is the gold standard for confirming PE?",options:["Chest X-ray","ECG","Computed tomography (CT) of the chest","Arterial blood gases"],correct:"Computed tomography (CT) of the chest"},
+    {q:"What does echocardiography show in massive PE?",options:["Left ventricular hypertrophy","Right heart strain and dilation","Normal cardiac function","Pericardial effusion"],correct:"Right heart strain and dilation"},
+    {q:"ABG findings in PE typically show:",options:["Increased PaO2 and normal PaCO2","Decreased PaO2 indicating hypoxia","Normal ABG with compensated alkalosis","Metabolic alkalosis only"],correct:"Decreased PaO2 indicating hypoxia"},
+    {q:"When should you clinically suspect PE?",options:["When the patient has bradycardia and hypertension","When the patient has risk factors plus dyspnea, chest pain, tachycardia, cough, and anxiety","When the patient only has cough and fever","When ABG is normal but patient is anxious"],correct:"When the patient has risk factors plus dyspnea, chest pain, tachycardia, cough, and anxiety"},
+    {q:"Why is PE called 'a hidden threat'?",options:["It only occurs in ICU patients","It is clinically difficult to diagnose","It causes no symptoms until fatal","It only affects elderly patients"],correct:"It is clinically difficult to diagnose"},
+    {q:"If PE treatment is delayed, the patient may develop:",options:["Pulmonary edema only","Acute right ventricular ischemia progressing to MI, heart failure, and cardiovascular collapse","Left ventricular failure only","Pleural effusion"],correct:"Acute right ventricular ischemia progressing to MI, heart failure, and cardiovascular collapse"},
+    {q:"What is the primary goal of PE treatment?",options:["Reduce fever and inflammation","Restore blood flow through the pulmonary vasculature and prevent complications","Give pain relief only","Prevent atrial fibrillation"],correct:"Restore blood flow through the pulmonary vasculature and prevent complications"},
+    {q:"Which drug class is central to PE treatment?",options:["Corticosteroids","Antithrombotic medications","Bronchodilators","Vasopressors"],correct:"Antithrombotic medications"},
+    {q:"Which vital signs and parameter must be monitored in PE treatment?",options:["Blood glucose and temperature","PaO2, cardiac rhythm, and vital signs","Central venous pressure only","Urine output and creatinine"],correct:"PaO2, cardiac rhythm, and vital signs"},
+    {q:"What is pulmonary edema?",options:["Rupture of alveolar walls causing emphysema","Abnormal accumulation of fluid in the lung tissue","Air accumulation in the pleural space","Clot formation in pulmonary arteries"],correct:"Abnormal accumulation of fluid in the lung tissue"},
+    {q:"What is the most common cause of pulmonary edema?",options:["Pulmonary embolism","Near-drowning","Left ventricular failure","Drug overdose"],correct:"Left ventricular failure"},
+    {q:"Cardiogenic pulmonary edema results from:",options:["Damage to the alveolar capillary membrane","Lymphatic obstruction","Increased pulmonary capillary filtrate pressure","Inhalation injury"],correct:"Increased pulmonary capillary filtrate pressure"},
+    {q:"Which condition causes cardiogenic pulmonary edema?",options:["Sepsis","Smoke inhalation","Acute myocardial infarction","Drug overdose"],correct:"Acute myocardial infarction"},
+    {q:"Non-cardiogenic pulmonary edema results from:",options:["Left ventricular failure","Increased capillary pressure","Damage of the alveolar capillary membrane","Mitral stenosis"],correct:"Damage of the alveolar capillary membrane"},
+    {q:"Which of the following causes non-cardiogenic pulmonary edema?",options:["Acute left ventricular failure","Mitral valve disease","Inhalation injury (aspiration, smoke, near-drowning)","Acute MI"],correct:"Inhalation injury (aspiration, smoke, near-drowning)"},
+    {q:"Sepsis causes pulmonary edema through which mechanism?",options:["Increased cardiac output","Circulatory route — direct damage to alveolar capillary membrane","Elevated left ventricular filling pressure","Neurogenic pulmonary vasoconstriction"],correct:"Circulatory route — direct damage to alveolar capillary membrane"},
+    {q:"What type of sputum is characteristic of cardiogenic pulmonary edema?",options:["Blood-tinged thick sputum","Yellow purulent sputum","Pink, frothy sputum","Clear thin sputum"],correct:"Pink, frothy sputum"},
+    {q:"Bilateral inspiratory crackles on auscultation in a dyspneic patient suggest:",options:["Pneumothorax","Pulmonary embolism","Pulmonary edema","Pleural effusion"],correct:"Pulmonary edema"},
+    {q:"What level of consciousness change is seen in severe pulmonary edema?",options:["Hyperalertness","Decreased level of consciousness","Seizures only","No change"],correct:"Decreased level of consciousness"},
+    {q:"What does ECG show in pulmonary edema?",options:["ST elevation only","Normal sinus rhythm","Tachycardia and dysrhythmias","Complete heart block"],correct:"Tachycardia and dysrhythmias"},
+    {q:"Which investigation shows the extent of hypoxia in pulmonary edema?",options:["Chest X-ray","CBC","Arterial blood gases","ECG"],correct:"Arterial blood gases"},
+    {q:"What is the FIRST step in treating pulmonary edema?",options:["Administer diuretics IV","Insert a Foley catheter","Elevate the head of bed and administer 100% oxygen by mask","Apply CPAP immediately"],correct:"Elevate the head of bed and administer 100% oxygen by mask"},
+    {q:"Lymphatic obstruction as a cause of non-cardiogenic pulmonary edema is most commonly associated with:",options:["DVT","Drug overdose","Carcinoma","Sepsis"],correct:"Carcinoma"},
+    {q:"Which parameter must be monitored continuously in pulmonary edema treatment?",options:["Blood glucose and hemoglobin","PaO2 level, BP, and cardiac rate and rhythm","Temperature and urine specific gravity","Serum electrolytes only"],correct:"PaO2 level, BP, and cardiac rate and rhythm"},
+    {q:"Intercostal and suprasternal retractions in pulmonary edema indicate:",options:["Decreased work of breathing","Labored breathing with increased respiratory effort","Normal breathing pattern","Upper airway obstruction only"],correct:"Labored breathing with increased respiratory effort"},
   ],
 };
 
